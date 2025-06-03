@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">TestEffectiveMobile</string>
+    <string name="navigation_item_search">Поиск</string>
+    <string name="navigation_item_favorites">Избранное</string>
+    <string name="navigation_item_responses">Отклики</string>
+    <string name="navigation_item_message">Сообщения</string>
+    <string name="navigation_item_profile">Профиль</string>
+</resources>
