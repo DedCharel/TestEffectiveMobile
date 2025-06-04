@@ -37,11 +37,14 @@ fun VacancyPreviewCard() {
         )
 
     ) {
-        Box(modifier = Modifier
-            .fillMaxWidth()
-            .wrapContentHeight()) {
+        Box(
+            modifier = Modifier
+                .fillMaxWidth()
+                .wrapContentHeight()
+        ) {
             Icon(
-                Icons.Outlined.Favorite, modifier = Modifier
+                Icons.Outlined.Favorite,
+                modifier = Modifier
                     .align(Alignment.TopEnd)
                     .padding(top = 16.dp, end = 16.dp), contentDescription = null
             )
@@ -72,7 +75,7 @@ fun VacancyPreviewCard() {
                             painter = painterResource(id = R.drawable.check),
                             contentDescription = null,
 
-                        )
+                            )
                     }
 
                 }
