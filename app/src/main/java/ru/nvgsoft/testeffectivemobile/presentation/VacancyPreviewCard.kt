@@ -1,20 +1,19 @@
-package ru.nvgsoft.testeffectivemobile
+package ru.nvgsoft.testeffectivemobile.presentation
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.wrapContentHeight
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.outlined.Favorite
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
-import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.material3.Text
@@ -24,12 +23,18 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import ru.nvgsoft.testeffectivemobile.R
+import ru.nvgsoft.testeffectivemobile.domain.Vacancy
+import ru.nvgsoft.testeffectivemobile.utils.toFormattedDate
 
 @Composable
-fun VacancyPreviewCard() {
+fun VacancyPreviewCard(
+    vacancy: Vacancy,
+    onFavouriteClick: (Vacancy)-> Unit,
+    modifier: Modifier = Modifier
+) {
     Card(
-        modifier = Modifier
-            .padding(start = 16.dp, end = 16.dp, bottom = 8.dp)
+        modifier = modifier
             .fillMaxWidth()
             .wrapContentHeight(),
         colors = CardDefaults.cardColors(
@@ -42,11 +47,17 @@ fun VacancyPreviewCard() {
                 .fillMaxWidth()
                 .wrapContentHeight()
         ) {
-            Icon(
-                Icons.Outlined.Favorite,
+            var iconFavorite = painterResource(R.drawable.ic_heart)
+            if (vacancy.isFavorite) {
+               iconFavorite = painterResource(R.drawable.ic_heart2)
+            }
+            Image(
+                iconFavorite ,
                 modifier = Modifier
                     .align(Alignment.TopEnd)
-                    .padding(top = 16.dp, end = 16.dp), contentDescription = null
+                    .padding(top = 16.dp, end = 16.dp). size(24.dp)
+                    .clickable { onFavouriteClick(vacancy) },
+                contentDescription = null
             )
             Column(
                 modifier = Modifier
@@ -54,27 +65,28 @@ fun VacancyPreviewCard() {
                     .fillMaxWidth(0.8f),
                 verticalArrangement = Arrangement.spacedBy(8.dp)
             ) {
+                if (vacancy.lookingNumber > 0){
+                    Text(
+                        text = "Сейчас просматривает ${vacancy.lookingNumber} человек",
+                        color = MaterialTheme.colorScheme.onSurface,
+                        fontSize = 14.sp
+                    )
+                }
                 Text(
-                    text = "Сейчас просматривает 1 человек",
-                    color = MaterialTheme.colorScheme.onSurface,
-                    fontSize = 14.sp
-                )
-                Text(
-                    text = "Наименование вакансии очень длинный текст для проверки",
+                    text = vacancy.title,
                     fontSize = 16.sp,
                     color = Color.White
                 )
                 Column {
-                    Text(text = "Город", fontSize = 14.sp, color = Color.White)
+                    Text(text = vacancy.address.town, fontSize = 14.sp, color = Color.White)
                     Row {
-                        Text(text = "Организация", fontSize = 14.sp, color = Color.White)
+                        Text(text = vacancy.company, fontSize = 14.sp, color = Color.White)
                         Image(
                             modifier = Modifier
                                 .padding(start = 8.dp)
                                 .align(Alignment.CenterVertically),
                             painter = painterResource(id = R.drawable.check),
                             contentDescription = null,
-
                             )
                     }
 
@@ -87,13 +99,13 @@ fun VacancyPreviewCard() {
                     )
                     Text(
                         modifier = Modifier.padding(start = 8.dp),
-                        text = "Опыт от 1 до 3 лет",
+                        text = vacancy.experience.previewText,
                         fontSize = 14.sp,
                         color = Color.White
                     )
                 }
 
-                Text(text = "Опубликованно 20 января")
+                Text(text = "Опубликованно ${vacancy.publishedDate.toFormattedDate()}")
             }
         }
 
@@ -114,3 +126,5 @@ fun VacancyPreviewCard() {
 
     }
 }
+
+

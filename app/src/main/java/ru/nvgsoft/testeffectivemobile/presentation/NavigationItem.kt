@@ -1,4 +1,4 @@
-package ru.nvgsoft.testeffectivemobile
+package ru.nvgsoft.testeffectivemobile.presentation
 
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Notifications
@@ -7,33 +7,36 @@ import androidx.compose.material.icons.outlined.Favorite
 import androidx.compose.material.icons.outlined.MailOutline
 import androidx.compose.material.icons.outlined.Person
 import androidx.compose.material.icons.outlined.Search
+import androidx.compose.ui.res.stringResource
+import ru.nvgsoft.testeffectivemobile.R
 
 sealed class NavigationItem(
     val titleResId: Int,
-    val icon: ImageVector
+    val icon: Int,
+
 ) {
     object Find : NavigationItem(
         titleResId = R.string.navigation_item_search,
-        icon = Icons.Outlined.Search
+        icon = R.drawable.ic_search,
     )
 
     object Favorites : NavigationItem(
         titleResId = R.string.navigation_item_favorites,
-        icon = Icons.Outlined.Favorite
+        icon = R.drawable.ic_heart,
     )
 
     object Responses : NavigationItem(
         titleResId = R.string.navigation_item_responses,
-        icon = Icons.Outlined.MailOutline
+        icon = R.drawable.ic_envelope,
     )
     object Message : NavigationItem(
         titleResId = R.string.navigation_item_message,
-        icon = Icons.Default.Notifications
+        icon = R.drawable.ic_message
     )
 
     object Profile : NavigationItem(
         titleResId = R.string.navigation_item_profile,
-        icon = Icons.Outlined.Person
+        icon = R.drawable.ic_profile
     )
 
 }
