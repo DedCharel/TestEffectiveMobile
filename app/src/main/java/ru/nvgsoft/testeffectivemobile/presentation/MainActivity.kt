@@ -15,10 +15,6 @@ class MainActivity : ComponentActivity() {
 
         val viewModel by viewModels<MainViewModel> ()
 
-        fun onClickOffer(url:String) = {
-            Intent(Intent.ACTION_VIEW, Uri.parse(url))
-
-        }
 
         setContent {
             TestEffectiveMobileTheme {

@@ -5,4 +5,9 @@
     <string name="navigation_item_responses">Отклики</string>
     <string name="navigation_item_message">Сообщения</string>
     <string name="navigation_item_profile">Профиль</string>
+    <string name="response">Откликнутся</string>
+    <string name="your_tasks">Ваши задачи</string>
+    <string name="ask_question">Задайте вопросы работодателю</string>
+    <string name="question_with_response">Он получит его с откликом на вакансию</string>
+    <string name="vacancy_for_you">Вакансии для вас</string>
 </resources>

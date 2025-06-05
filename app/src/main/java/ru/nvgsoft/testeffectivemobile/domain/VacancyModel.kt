@@ -1,6 +1,6 @@
 package ru.nvgsoft.testeffectivemobile.domain
 
-data class Vacancy(
+data class VacancyModel(
     val id: String = "cbf0c984-7c6c-4ada-82da-e29dc698bb50",
     val lookingNumber: Int = 2,
     val title: String = "UI/UX дизайнер",

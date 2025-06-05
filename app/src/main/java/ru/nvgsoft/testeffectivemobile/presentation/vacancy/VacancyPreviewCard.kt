@@ -1,4 +1,4 @@
-package ru.nvgsoft.testeffectivemobile.presentation
+package ru.nvgsoft.testeffectivemobile.presentation.vacancy
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
@@ -14,6 +14,7 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.material3.Text
@@ -21,16 +22,17 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import ru.nvgsoft.testeffectivemobile.R
-import ru.nvgsoft.testeffectivemobile.domain.Vacancy
+import ru.nvgsoft.testeffectivemobile.domain.VacancyModel
 import ru.nvgsoft.testeffectivemobile.utils.toFormattedDate
 
 @Composable
 fun VacancyPreviewCard(
-    vacancy: Vacancy,
-    onFavouriteClick: (Vacancy)-> Unit,
+    vacancy: VacancyModel,
+    onFavouriteClick: (VacancyModel)-> Unit,
     modifier: Modifier = Modifier
 ) {
     Card(
@@ -51,11 +53,12 @@ fun VacancyPreviewCard(
             if (vacancy.isFavorite) {
                iconFavorite = painterResource(R.drawable.ic_heart2)
             }
-            Image(
+            Icon(
                 iconFavorite ,
                 modifier = Modifier
                     .align(Alignment.TopEnd)
-                    .padding(top = 16.dp, end = 16.dp). size(24.dp)
+                    .padding(top = 16.dp, end = 16.dp)
+                    .size(24.dp)
                     .clickable { onFavouriteClick(vacancy) },
                 contentDescription = null
             )
@@ -120,7 +123,7 @@ fun VacancyPreviewCard(
             )
         )
         {
-            Text(text = "Откликнутся")
+            Text(text = stringResource(R.string.response))
         }
 
 
