@@ -16,7 +16,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import ru.nvgsoft.testeffectivemobile.R
-import ru.nvgsoft.testeffectivemobile.domain.VacancyModel
+import ru.nvgsoft.testeffectivemobile.domain.entity.VacancyModel
 
 @Composable
 fun QuestionDetail(vacancy: VacancyModel) {

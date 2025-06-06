@@ -22,8 +22,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import ru.nvgsoft.testeffectivemobile.R
-import ru.nvgsoft.testeffectivemobile.domain.OfferModel
-import ru.nvgsoft.testeffectivemobile.domain.VacancyModel
+import ru.nvgsoft.testeffectivemobile.domain.entity.OfferModel
+import ru.nvgsoft.testeffectivemobile.domain.entity.VacancyModel
 
 @Composable
 fun VacancyScreen(

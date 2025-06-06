@@ -19,12 +19,12 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.compose.currentBackStackEntryAsState
-import ru.nvgsoft.testeffectivemobile.domain.VacancyModel
+import ru.nvgsoft.testeffectivemobile.domain.entity.VacancyModel
 import ru.nvgsoft.testeffectivemobile.navigation.AppNavGraph
 import ru.nvgsoft.testeffectivemobile.navigation.rememberNavigationState
 import ru.nvgsoft.testeffectivemobile.presentation.favourite.FavoriteScreen
-import ru.nvgsoft.testeffectivemobile.presentation.favourite.FavouriteViewModel
 import ru.nvgsoft.testeffectivemobile.presentation.message.MessageScreen
 import ru.nvgsoft.testeffectivemobile.presentation.profile.ProfileScreen
 import ru.nvgsoft.testeffectivemobile.presentation.response.ResponseScreen
@@ -50,7 +50,6 @@ fun MainScreen() {
 
             
             val navBackStackEntry by navigationState.navHostController.currentBackStackEntryAsState()
-            val currentRout = navBackStackEntry?.destination?.route
             val items = listOf(
                 NavigationItem.Find,
                 NavigationItem.Favorites,
@@ -59,11 +58,16 @@ fun MainScreen() {
                 NavigationItem.Profile
             )
             items.forEach { item ->
+                val selected = navBackStackEntry?.destination?.hierarchy?.any{
+                    it.route == item.screen.route
+                } ?: false
                 NavigationBarItem(
 
-                    selected = currentRout == item.screen.route,
+                    selected = selected,
                     onClick = {
-                        navigationState.navigateTo(item.screen.route)
+                        if (!selected) {
+                            navigationState.navigateTo(item.screen.route)
+                        }
                     },
                     icon = {
                         Icon(painterResource(id = item.icon), contentDescription = null)
@@ -86,20 +90,23 @@ fun MainScreen() {
         AppNavGraph(
             navHostController = navigationState.navHostController,
             vacancyScreenContent = {
-                if (vacancy.value == null){
+
                     VacancyScreen(
                         {
                             vacancy.value = it
+                            navigationState.navigateToDetail(it)
                         },
                         Modifier.padding(padding)
                     )    
-                } else {
-                    VacancyDetailScreen(onBackPress = {
-                        vacancy.value = null },
-                        Modifier.padding(padding)
-                    )
-                }
-                
+
+            },
+            vacancyDetailScreenContent = {
+                VacancyDetailScreen(onBackPress = {
+                    navigationState.navHostController.popBackStack()
+                                                  },
+                    Modifier.padding(padding),
+                    vacancy= vacancy.value!!
+                )
             },
             favouriteScreenContent = { FavoriteScreen(Modifier.padding(padding)) },
             responseScreenContent = { ResponseScreen() },

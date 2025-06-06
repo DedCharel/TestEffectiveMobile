@@ -26,7 +26,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import ru.nvgsoft.testeffectivemobile.R
-import ru.nvgsoft.testeffectivemobile.domain.VacancyModel
+import ru.nvgsoft.testeffectivemobile.domain.entity.VacancyModel
 import ru.nvgsoft.testeffectivemobile.utils.toFormattedDate
 
 @Composable
@@ -85,7 +85,7 @@ fun VacancyPreviewCard(
                     color = Color.White
                 )
                 Column {
-                    Text(text = vacancy.address.town, fontSize = 14.sp, color = Color.White)
+                    Text(text = vacancy.addressTown, fontSize = 14.sp, color = Color.White)
                     Row {
                         Text(text = vacancy.company, fontSize = 14.sp, color = Color.White)
                         Image(
@@ -106,7 +106,7 @@ fun VacancyPreviewCard(
                     )
                     Text(
                         modifier = Modifier.padding(start = 8.dp),
-                        text = vacancy.experience.previewText,
+                        text = vacancy.experiencePreviewText,
                         fontSize = 14.sp,
                         color = Color.White
                     )

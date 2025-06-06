@@ -25,12 +25,12 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import ru.nvgsoft.testeffectivemobile.R
-import ru.nvgsoft.testeffectivemobile.domain.OfferModel
+import ru.nvgsoft.testeffectivemobile.domain.entity.OfferModel
 
 
 @Composable
 fun OfferPreviewCard(
-    offer:OfferModel,
+    offer: OfferModel,
     modifier: Modifier = Modifier
 ) {
 
@@ -68,8 +68,8 @@ fun OfferPreviewCard(
             modifier = Modifier.padding(start = 8.dp)
         ) {
             Text(text = offer.title, fontSize = 14.sp, color = Color.White)
-            if (offer.button != null){
-                Text(text = offer.button.text, fontSize = 14.sp, color = MaterialTheme.colorScheme.onSurface)
+            if (offer.buttonText != null){
+                Text(text = offer.buttonText, fontSize = 14.sp, color = MaterialTheme.colorScheme.onSurface)
             }
 
         }

@@ -1,7 +1,7 @@
 package ru.nvgsoft.testeffectivemobile.presentation.vacancy
 
-import ru.nvgsoft.testeffectivemobile.domain.OfferModel
-import ru.nvgsoft.testeffectivemobile.domain.VacancyModel
+import ru.nvgsoft.testeffectivemobile.domain.entity.OfferModel
+import ru.nvgsoft.testeffectivemobile.domain.entity.VacancyModel
 
 sealed class VacancyScreenState {
 

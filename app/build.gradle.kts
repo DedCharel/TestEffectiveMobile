@@ -102,4 +102,13 @@ dependencies {
     //Compose LiveData
     implementation(libs.compose.livedata)
 
+    //Room
+    implementation(libs.room)
+    // Кодогенератор Room
+    ksp(libs.room.compiler)
+// optional - Kotlin Extensions and Coroutines support for Room
+    implementation(libs.room.ktx)
+    //ViewModel
+    implementation(libs.viewModel)
+
 }

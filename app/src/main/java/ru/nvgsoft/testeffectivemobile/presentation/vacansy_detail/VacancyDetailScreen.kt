@@ -9,48 +9,22 @@ import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.viewmodel.compose.viewModel
 import ru.nvgsoft.testeffectivemobile.R
-import ru.nvgsoft.testeffectivemobile.domain.VacancyModel
+import ru.nvgsoft.testeffectivemobile.domain.entity.VacancyModel
 
 
 @Composable
 fun VacancyDetailScreen(
     onBackPress: () -> Unit,
     modifier: Modifier = Modifier,
+    vacancy: VacancyModel
 
     ) {
 
-    val viewModel: VacancyDetailViewModel = viewModel()
-    val screenState = viewModel.screenState.observeAsState(VacancyDetailScreenState.Initial)
-
-    when (val currentState = screenState.value) {
-        is VacancyDetailScreenState.VacancyDetail -> {
-            Detail(
-                currentState.vacancy,
-                onBackPress,
-                modifier
-            )
-        }
-
-        else -> {}
-    }
-
-
-}
-
-
-@Composable
-fun Detail(
-    vacancy: VacancyModel,
-    onBackPress: () -> Unit,
-    modifier: Modifier = Modifier
-) {
     LazyColumn(modifier.padding(start = 16.dp, end = 16.dp)) {
         item {
             TopBarDetail(onBackPress)
@@ -79,6 +53,7 @@ fun Detail(
 
     }
 }
+
 
 
 

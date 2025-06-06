@@ -23,7 +23,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import ru.nvgsoft.testeffectivemobile.R
-import ru.nvgsoft.testeffectivemobile.domain.VacancyModel
+import ru.nvgsoft.testeffectivemobile.domain.entity.VacancyModel
 
 @Composable
 fun CompanyDetail(
@@ -63,7 +63,7 @@ fun CompanyDetail(
 
             Spacer(modifier = Modifier.height(8.dp))
             Text(
-                text = "${vacancy.address.town}, ${vacancy.address.street}, ${vacancy.address.house}",
+                text = "${vacancy.addressTown}, ${vacancy.addressStreet}, ${vacancy.addressHouse}",
                 color = Color.White,
                 fontSize = 14.sp
             )

@@ -17,6 +17,8 @@ retrofit_version="2.11.0"
 ksp_version ="2.1.10-1.0.29"
 dagger2_version = "2.55"
 compose_livedata_version = "1.7.6"
+room_version = "2.6.1"
+viewModel_version="2.8.6"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -63,6 +65,14 @@ dagger2 = { group = "com.google.dagger", name = "dagger", version.ref = "dagger2
 dagger2-compiler = { group = "com.google.dagger", name = "dagger-compiler", version.ref = "dagger2_version" }
 #Dagger2 аннотации
 dagger2-android-processor = { group = "com.google.dagger", name = "dagger-android-processor", version.ref = "dagger2_version" }
+#Библиотека Room
+room = {group = "androidx.room", name = "room-runtime", version.ref = "room_version"}
+#Кодогенератор
+room-compiler = {group="androidx.room", name = "room-compiler", version.ref ="room_version"}
+#optional - Kotlin Extensions and Coroutines support for Room
+room-ktx = {group = "androidx.room", name = "room-ktx", version.ref = "room_version"}
+#ViewModel
+viewModel = {group = "androidx.lifecycle", name = "lifecycle-viewmodel-ktx", version.ref ="viewModel_version"}
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
@@ -71,6 +81,5 @@ jetbrains-kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = 
 kotlin-parcelize = { id = "org.jetbrains.kotlin.plugin.parcelize", version.ref = "kotlin" }
 #ksp
 ksp = {id = "com.google.devtools.ksp", version.ref ="ksp_version"}
-
 org-jetbrains-kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }

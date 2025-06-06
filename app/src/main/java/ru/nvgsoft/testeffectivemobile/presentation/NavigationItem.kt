@@ -18,7 +18,7 @@ sealed class NavigationItem(
 
 ) {
     object Find : NavigationItem(
-        screen = Screen.Vacancy,
+        screen = Screen.Home,
         titleResId = R.string.navigation_item_search,
         icon = R.drawable.ic_search,
     )

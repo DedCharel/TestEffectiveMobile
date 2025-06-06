@@ -8,7 +8,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import ru.nvgsoft.testeffectivemobile.domain.VacancyModel
+import ru.nvgsoft.testeffectivemobile.domain.entity.VacancyModel
 
 @Composable
 fun MainInfoDetail(
@@ -22,18 +22,18 @@ fun MainInfoDetail(
         fontSize = 22.sp
     )
     Spacer(modifier = Modifier.height(20.dp))
-    vacancy.salary?.let {
+
         Text(
             modifier = modifier,
-            text = it.full,
+            text = vacancy.salaryFull,
             color = Color.White,
             fontSize = 14.sp
         )
         Spacer(modifier = Modifier.height(8.dp))
-    }
+
     Text(
         modifier = modifier,
-        text = "Требуемый опыт: ${vacancy.experience.previewText}",
+        text = "Требуемый опыт: ${vacancy.experiencePreviewText}",
         color = Color.White,
         fontSize = 14.sp
     )

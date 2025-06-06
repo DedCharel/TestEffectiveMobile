@@ -10,7 +10,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import ru.nvgsoft.testeffectivemobile.R
-import ru.nvgsoft.testeffectivemobile.domain.VacancyModel
+import ru.nvgsoft.testeffectivemobile.domain.entity.VacancyModel
 
 @Composable
 fun TasksDetail(
@@ -18,7 +18,7 @@ fun TasksDetail(
     modifier: Modifier = Modifier
 ){
     Spacer(modifier = Modifier.height(8.dp))
-    Text(text = vacancy.description,
+    Text(text = vacancy.description ?:"",
         color = Color.White)
     Spacer(modifier = Modifier.height(16.dp))
     Text(
