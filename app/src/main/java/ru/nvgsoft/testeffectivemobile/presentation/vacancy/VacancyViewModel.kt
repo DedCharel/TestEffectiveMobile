@@ -1,4 +1,4 @@
-package ru.nvgsoft.testeffectivemobile.presentation
+package ru.nvgsoft.testeffectivemobile.presentation.vacancy
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -7,12 +7,11 @@ import ru.nvgsoft.testeffectivemobile.domain.ButtonText
 import ru.nvgsoft.testeffectivemobile.domain.OfferModel
 import ru.nvgsoft.testeffectivemobile.domain.VacancyModel
 
-class MainViewModel: ViewModel() {
+class VacancyViewModel: ViewModel() {
 
-    private val _vacancy = MutableLiveData<List<VacancyModel>>(listOf(VacancyModel(), VacancyModel( id = "111"), VacancyModel( id = "222"), VacancyModel(id = "333")))
-    val vacancy: LiveData<List<VacancyModel>> = _vacancy
+    private val sourceList = listOf(VacancyModel(), VacancyModel( id = "111"), VacancyModel( id = "222"), VacancyModel(id = "333"))
 
-    val initOffers = listOf(
+    private val initOffers = listOf(
         OfferModel(),
         OfferModel(
             id = "level_up_resume",
@@ -28,8 +27,19 @@ class MainViewModel: ViewModel() {
 
     )
 
-    private val _offers= MutableLiveData<List<OfferModel>>(initOffers)
-    val offers: LiveData<List<OfferModel>> = _offers
+    private val vacancyState = VacancyScreenState.VacancyList(sourceList, initOffers)
+
+    private val _screenState = MutableLiveData<VacancyScreenState>(vacancyState)
+    val screenState: LiveData<VacancyScreenState> = _screenState
+
+
+
+
+
+
+    private var savedState: VacancyScreenState? = vacancyState
+
+
 
     fun changeFavourite(vac: VacancyModel){
         //TODO

@@ -6,6 +6,7 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
+import ru.nvgsoft.testeffectivemobile.presentation.favourite.FavouriteViewModel
 import ru.nvgsoft.testeffectivemobile.ui.theme.TestEffectiveMobileTheme
 
 class MainActivity : ComponentActivity() {
@@ -13,12 +14,12 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val viewModel by viewModels<MainViewModel> ()
+
 
 
         setContent {
             TestEffectiveMobileTheme {
-                MainScreen(viewModel)
+                MainScreen()
 
             }
         }

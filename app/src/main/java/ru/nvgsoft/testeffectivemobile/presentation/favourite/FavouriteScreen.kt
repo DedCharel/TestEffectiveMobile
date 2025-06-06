@@ -10,16 +10,16 @@ import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.sp
-import ru.nvgsoft.testeffectivemobile.presentation.MainViewModel
 import androidx.compose.foundation.lazy.items
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import ru.nvgsoft.testeffectivemobile.presentation.vacancy.VacancyPreviewCard
 
 @Composable
 fun FavoriteScreen(
-    viewModel: MainViewModel,
     modifier: Modifier = Modifier
 ){
+    val viewModel: FavouriteViewModel = viewModel()
     val vacancies = viewModel.vacancy.observeAsState(listOf()).value
     val size = vacancies?.size
     LazyColumn (modifier. padding(start = 16.dp, top = 16.dp, end = 16.dp)) {
@@ -41,7 +41,11 @@ fun FavoriteScreen(
             VacancyPreviewCard(
                 it,
                 onFavouriteClick = {} ,
-                Modifier.padding(bottom = 8.dp))
+                onVacancyCLick = {},
+                Modifier.padding(bottom = 8.dp)
+
+
+            )
         }
 
 

@@ -19,6 +19,7 @@ import ru.nvgsoft.testeffectivemobile.R
 
 @Composable
 fun TopBarDetail(
+    onBackPress: () -> Unit,
     modifier: Modifier = Modifier
 ) {
 
@@ -31,7 +32,9 @@ fun TopBarDetail(
             painter = painterResource(R.drawable.ic_back),
             contentDescription = null,
             tint = Color.White,
-            modifier = Modifier.clickable {  }
+            modifier = Modifier.clickable {
+                onBackPress()
+            }
         )
         Box(contentAlignment = Alignment.TopEnd, modifier = Modifier.fillMaxWidth()) {
             Row(horizontalArrangement = Arrangement.End) {

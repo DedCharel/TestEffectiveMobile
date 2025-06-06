@@ -33,12 +33,16 @@ import ru.nvgsoft.testeffectivemobile.utils.toFormattedDate
 fun VacancyPreviewCard(
     vacancy: VacancyModel,
     onFavouriteClick: (VacancyModel)-> Unit,
+    onVacancyCLick: (VacancyModel) -> Unit,
     modifier: Modifier = Modifier
 ) {
     Card(
         modifier = modifier
             .fillMaxWidth()
-            .wrapContentHeight(),
+            .wrapContentHeight()
+            .clickable {
+                onVacancyCLick(vacancy)
+            },
         colors = CardDefaults.cardColors(
             containerColor = MaterialTheme.colorScheme.surfaceVariant,
         )

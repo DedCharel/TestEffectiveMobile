@@ -9,5 +9,5 @@ import ru.nvgsoft.testeffectivemobile.presentation.vacansy_detail.VacancyDetailS
 fun MessageScreen(
     modifier: Modifier = Modifier
 ){
-    VacancyDetailScreen(vacancy = VacancyModel(), modifier)
+
 }

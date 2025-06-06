@@ -10,30 +10,34 @@ import androidx.compose.material3.NavigationBarItemDefaults
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.compose.currentBackStackEntryAsState
-import androidx.navigation.compose.rememberNavController
+import ru.nvgsoft.testeffectivemobile.domain.VacancyModel
 import ru.nvgsoft.testeffectivemobile.navigation.AppNavGraph
-import ru.nvgsoft.testeffectivemobile.navigation.Screen
 import ru.nvgsoft.testeffectivemobile.navigation.rememberNavigationState
 import ru.nvgsoft.testeffectivemobile.presentation.favourite.FavoriteScreen
+import ru.nvgsoft.testeffectivemobile.presentation.favourite.FavouriteViewModel
 import ru.nvgsoft.testeffectivemobile.presentation.message.MessageScreen
 import ru.nvgsoft.testeffectivemobile.presentation.profile.ProfileScreen
 import ru.nvgsoft.testeffectivemobile.presentation.response.ResponseScreen
 import ru.nvgsoft.testeffectivemobile.presentation.vacancy.VacancyScreen
+import ru.nvgsoft.testeffectivemobile.presentation.vacansy_detail.VacancyDetailScreen
 
 
 @Composable
-fun MainScreen(
-    viewModel: MainViewModel
-) {
+fun MainScreen() {
     val navigationState = rememberNavigationState()
-
+    val vacancy: MutableState<VacancyModel?> = remember {
+        mutableStateOf(null)
+    }
 
     Scaffold(bottomBar =
     {
@@ -82,12 +86,22 @@ fun MainScreen(
         AppNavGraph(
             navHostController = navigationState.navHostController,
             vacancyScreenContent = {
-                VacancyScreen(
-                    viewModel = viewModel,
-                    Modifier.padding(padding)
-                )
+                if (vacancy.value == null){
+                    VacancyScreen(
+                        {
+                            vacancy.value = it
+                        },
+                        Modifier.padding(padding)
+                    )    
+                } else {
+                    VacancyDetailScreen(onBackPress = {
+                        vacancy.value = null },
+                        Modifier.padding(padding)
+                    )
+                }
+                
             },
-            favouriteScreenContent = { FavoriteScreen(viewModel, Modifier.padding(padding)) },
+            favouriteScreenContent = { FavoriteScreen(Modifier.padding(padding)) },
             responseScreenContent = { ResponseScreen() },
             messageScreenContent = { MessageScreen(Modifier.padding(padding)) },
             profileScreenContent = { ProfileScreen() })
