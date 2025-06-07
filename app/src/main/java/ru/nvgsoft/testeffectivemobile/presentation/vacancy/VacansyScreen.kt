@@ -27,14 +27,17 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import ru.nvgsoft.testeffectivemobile.R
 import ru.nvgsoft.testeffectivemobile.domain.entity.OfferEntity
 import ru.nvgsoft.testeffectivemobile.domain.entity.VacancyEntity
+import ru.nvgsoft.testeffectivemobile.presentation.ViewModelFactory
 
 @Composable
 fun VacancyScreen(
+    viewModelFactory: ViewModelFactory,
     onVacancyClick: (VacancyEntity) -> Unit,
     modifier: Modifier = Modifier
 ){
 
-    val viewModel: VacancyViewModel = viewModel()
+
+    val viewModel: VacancyViewModel = viewModel(factory = viewModelFactory)
     val vacancyScreenState = viewModel.vacancyScreenState.collectAsState(VacancyScreenState.Initial)
     val offerScreenState = viewModel.offerScreenState.collectAsState(OfferScreenState.Initial)
     val currentVacancyState: VacancyScreenState = vacancyScreenState.value

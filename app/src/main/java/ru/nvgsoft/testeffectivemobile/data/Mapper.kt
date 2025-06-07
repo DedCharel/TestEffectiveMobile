@@ -6,8 +6,9 @@ import ru.nvgsoft.testeffectivemobile.data.network.model.OfferDto
 import ru.nvgsoft.testeffectivemobile.data.network.model.VacancyDto
 import ru.nvgsoft.testeffectivemobile.domain.entity.OfferEntity
 import ru.nvgsoft.testeffectivemobile.domain.entity.VacancyEntity
+import javax.inject.Inject
 
-class Mapper {
+class Mapper @Inject constructor() {
 
     fun mapDtoModelVacancyToEntity(dto: VacancyDto): VacancyEntity {
         return VacancyEntity(
@@ -99,7 +100,6 @@ class Mapper {
 
         )
     }
-
 
 
     fun mapListDtoModelVacancyToListEntity(list: List<VacancyDto>): List<VacancyEntity>{

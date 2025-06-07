@@ -3,9 +3,9 @@ package ru.nvgsoft.testeffectivemobile.presentation.vacansy_detail
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import ru.nvgsoft.testeffectivemobile.domain.entity.VacancyEntity
+import javax.inject.Inject
 
-class VacancyDetailViewModel: ViewModel() {
+class VacancyDetailViewModel @Inject constructor(): ViewModel() {
 
     private val _screenState = MutableLiveData<VacancyDetailScreenState>(VacancyDetailScreenState.Initial)
     val screenState: LiveData<VacancyDetailScreenState> = _screenState
@@ -13,6 +13,6 @@ class VacancyDetailViewModel: ViewModel() {
 
 
     init {
-        _screenState.value = VacancyDetailScreenState.VacancyDetail(VacancyEntity())
+       // _screenState.value = VacancyDetailScreenState.VacancyDetail(VacancyDetailScreenState.Initial)
     }
 }

@@ -1,33 +1,31 @@
 package ru.nvgsoft.testeffectivemobile.presentation.vacancy
 
-import android.app.Application
-import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.launch
-import ru.nvgsoft.testeffectivemobile.data.RepositoryImpl
-import ru.nvgsoft.testeffectivemobile.domain.entity.VacancyEntity
 import ru.nvgsoft.testeffectivemobile.domain.usecase.ChangeFavoriteUseCase
 import ru.nvgsoft.testeffectivemobile.domain.usecase.GetOfferListUseCase
 import ru.nvgsoft.testeffectivemobile.domain.usecase.GetVacancyListUseCase
 import ru.nvgsoft.testeffectivemobile.domain.usecase.LoadDataToDatabaseUseCase
+import javax.inject.Inject
 
-class VacancyViewModel(application: Application) : AndroidViewModel(application) {
+class VacancyViewModel @Inject constructor(
+    private val getVacancyListUseCase: GetVacancyListUseCase,
+    private val getOfferListUseCase: GetOfferListUseCase,
+    private val loadDataToDatabaseUseCase: LoadDataToDatabaseUseCase,
+    private val changeFavoriteUseCase: ChangeFavoriteUseCase
+) : ViewModel() {
 
-    private val repository = RepositoryImpl(getApplication())
-    private val getVacancyListUseCase = GetVacancyListUseCase(repository)
-    private val getOfferListUseCase = GetOfferListUseCase(repository)
-    private val loadDataToDatabaseUseCase = LoadDataToDatabaseUseCase(repository)
-    private val changeFavoriteUseCase = ChangeFavoriteUseCase(repository)
 
     val vacancyScreenState: Flow<VacancyScreenState> = getVacancyListUseCase()
         .onStart { VacancyScreenState.Loading }
-        .map { VacancyScreenState.VacancyList(it)  }
+        .map { VacancyScreenState.VacancyList(it) }
     val offerScreenState: Flow<OfferScreenState> = getOfferListUseCase()
         .onStart { OfferScreenState.Loading }
-        .map {OfferScreenState.OfferList(it) }
+        .map { OfferScreenState.OfferList(it) }
 
 
     private fun loadData() {

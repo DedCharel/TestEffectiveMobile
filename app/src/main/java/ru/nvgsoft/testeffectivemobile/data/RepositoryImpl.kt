@@ -8,21 +8,24 @@ import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.stateIn
-import ru.nvgsoft.testeffectivemobile.data.database.AppDatabase
-import ru.nvgsoft.testeffectivemobile.data.network.ApiFactory
+import ru.nvgsoft.testeffectivemobile.data.database.AppDao
+import ru.nvgsoft.testeffectivemobile.data.network.ApiService
 import ru.nvgsoft.testeffectivemobile.domain.Repository
 import ru.nvgsoft.testeffectivemobile.domain.entity.OfferEntity
 import ru.nvgsoft.testeffectivemobile.domain.entity.VacancyEntity
 import ru.nvgsoft.testeffectivemobile.utils.mergeWith
+import javax.inject.Inject
 
 
-class RepositoryImpl(
-    application: Application
-): Repository {
+class RepositoryImpl @Inject constructor(
+    private val mapper: Mapper,
+    private val apiService: ApiService,
+    private val dao: AppDao
+) : Repository {
 
-    private val mapper = Mapper()
-    private val apiService = ApiFactory.apiService
-    private val dao = AppDatabase.getInstance(application).appDao()
+//    private val mapper = Mapper()
+//    private val apiService = ApiFactory.apiService
+//    private val dao = AppDatabase.getInstance(application).appDao()
 
     private val coroutineScope = CoroutineScope(Dispatchers.Default)
     private val refreshedListFlow = MutableSharedFlow<List<VacancyEntity>>()
@@ -49,14 +52,13 @@ class RepositoryImpl(
         get() = _offer.toList()
 
 
-
     private val vacancies: StateFlow<List<VacancyEntity>> = loadVacancies
         .mergeWith(refreshedListFlow)
         .stateIn(
-        scope = coroutineScope,
-        started = SharingStarted.Lazily,
-        initialValue = vacancy
-    )
+            scope = coroutineScope,
+            started = SharingStarted.Lazily,
+            initialValue = vacancy
+        )
 
     private val offers = loadOffers
         .stateIn(
@@ -65,9 +67,9 @@ class RepositoryImpl(
             initialValue = offer
         )
 
-   override fun getOfferList(): StateFlow<List<OfferEntity>> = offers
+    override fun getOfferList(): StateFlow<List<OfferEntity>> = offers
 
-   override fun getVacancyList(): StateFlow<List<VacancyEntity>> = vacancies
+    override fun getVacancyList(): StateFlow<List<VacancyEntity>> = vacancies
 
 
     override suspend fun loadDataToDatabase() {
@@ -75,16 +77,16 @@ class RepositoryImpl(
             val response = apiService.getData()
             dao.addVacancyList(mapper.mapListDtoModelVacancyToDBList(response.vacancies))
             dao.addOffer(mapper.mapListDtoModelOfferToDBList(response.offers))
-        } catch (e: Exception){
+        } catch (e: Exception) {
 
         }
 
     }
 
-    override suspend fun changeFavourite(vacancyId: String){
+    override suspend fun changeFavourite(vacancyId: String) {
         val currentVacancy = mapper.mapDbModelVacancyToEntity(dao.getVacancy(vacancyId))
         val oldVacancy = currentVacancy
-        val index =_vacancy.indexOf(currentVacancy)
+        val index = _vacancy.indexOf(currentVacancy)
         val newVacancy = currentVacancy.copy(isFavorite = !oldVacancy.isFavorite)
         dao.addVacancy(mapper.mapEntityVacancyToDbModel(newVacancy))
         _vacancy[index] = newVacancy

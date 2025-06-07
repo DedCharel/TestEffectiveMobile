@@ -2,8 +2,10 @@ package ru.nvgsoft.testeffectivemobile.presentation
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import ru.nvgsoft.testeffectivemobile.di.ApplicationScope
 import javax.inject.Inject
 import javax.inject.Provider
+
 
 class ViewModelFactory @Inject constructor(
     private val viewModelProviders: @JvmSuppressWildcards Map<Class<out ViewModel>, Provider<ViewModel>>
