@@ -33,9 +33,7 @@ import ru.nvgsoft.testeffectivemobile.presentation.vacansy_detail.VacancyDetailS
 
 
 @Composable
-fun MainScreen(
-    viewModelFactory: ViewModelFactory
-) {
+fun MainScreen() {
     val navigationState = rememberNavigationState()
 
     //временное решение , вакансию надо передавать при навигации если будет время переделаю
@@ -96,7 +94,6 @@ fun MainScreen(
             vacancyScreenContent = {
 
                     VacancyScreen(
-                        viewModelFactory,
                         {
                             vacancy.value = it
                             navigationState.navigateToDetail(it)
@@ -114,7 +111,7 @@ fun MainScreen(
                     vacancy= vacancy.value!!
                 )
             },
-            favouriteScreenContent = { FavoriteScreen(viewModelFactory,Modifier.padding(padding)) },
+            favouriteScreenContent = { FavoriteScreen(Modifier.padding(padding)) },
             responseScreenContent = { ResponseScreen() },
             messageScreenContent = { MessageScreen(Modifier.padding(padding)) },
             profileScreenContent = { ProfileScreen() })

@@ -15,7 +15,6 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import ru.nvgsoft.testeffectivemobile.R
 import ru.nvgsoft.testeffectivemobile.domain.entity.VacancyEntity
-import ru.nvgsoft.testeffectivemobile.presentation.ViewModelFactory
 
 
 @Composable

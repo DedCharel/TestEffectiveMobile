@@ -1,13 +1,5 @@
 package ru.nvgsoft.testeffectivemobile.presentation
 
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Notifications
-import androidx.compose.ui.graphics.vector.ImageVector
-import androidx.compose.material.icons.outlined.Favorite
-import androidx.compose.material.icons.outlined.MailOutline
-import androidx.compose.material.icons.outlined.Person
-import androidx.compose.material.icons.outlined.Search
-import androidx.compose.ui.res.stringResource
 import ru.nvgsoft.testeffectivemobile.R
 import ru.nvgsoft.testeffectivemobile.navigation.Screen
 

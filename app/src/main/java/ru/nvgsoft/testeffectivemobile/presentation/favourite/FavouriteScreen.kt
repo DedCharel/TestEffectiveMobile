@@ -14,15 +14,15 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import ru.nvgsoft.testeffectivemobile.presentation.ViewModelFactory
+import ru.nvgsoft.testeffectivemobile.presentation.getApplicationComponent
 import ru.nvgsoft.testeffectivemobile.presentation.vacancy.VacancyPreviewCard
 
 @Composable
 fun FavoriteScreen(
-    viewModelFactory: ViewModelFactory,
     modifier: Modifier = Modifier
 ){
-    //val component = getApplicationComponent()
-    val viewModel: FavouriteViewModel = viewModel(factory = viewModelFactory)
+    val component = getApplicationComponent()
+    val viewModel: FavouriteViewModel = viewModel(factory = component.getViewModelFactory())
     val vacancies = viewModel.vacancy.collectAsState(listOf()).value
     val size = vacancies?.size
     LazyColumn (modifier. padding(start = 16.dp, top = 16.dp, end = 16.dp)) {

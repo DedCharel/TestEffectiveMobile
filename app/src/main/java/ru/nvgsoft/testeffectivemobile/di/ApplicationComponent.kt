@@ -1,9 +1,11 @@
 package ru.nvgsoft.testeffectivemobile.di
 
+import android.app.Application
 import android.content.Context
 import dagger.BindsInstance
 import dagger.Component
 import ru.nvgsoft.testeffectivemobile.presentation.MainActivity
+import ru.nvgsoft.testeffectivemobile.presentation.ViewModelFactory
 
 @ApplicationScope
 @Component(
@@ -14,13 +16,13 @@ import ru.nvgsoft.testeffectivemobile.presentation.MainActivity
 )
 interface ApplicationComponent {
 
-    fun inject(mainActivity: MainActivity)
+    fun getViewModelFactory(): ViewModelFactory
 
     @Component.Factory
     interface Factory{
 
         fun create(
-            @BindsInstance context: Context
+            @BindsInstance application: Application
         ):ApplicationComponent
     }
 }
