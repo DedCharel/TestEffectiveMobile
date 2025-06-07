@@ -25,12 +25,12 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import ru.nvgsoft.testeffectivemobile.R
-import ru.nvgsoft.testeffectivemobile.domain.entity.OfferModel
+import ru.nvgsoft.testeffectivemobile.domain.entity.OfferEntity
 
 
 @Composable
 fun OfferPreviewCard(
-    offer: OfferModel,
+    offer: OfferEntity,
     modifier: Modifier = Modifier
 ) {
 

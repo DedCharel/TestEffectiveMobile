@@ -15,7 +15,6 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
@@ -26,51 +25,51 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import ru.nvgsoft.testeffectivemobile.R
-import ru.nvgsoft.testeffectivemobile.domain.entity.OfferModel
-import ru.nvgsoft.testeffectivemobile.domain.entity.VacancyModel
-import ru.nvgsoft.testeffectivemobile.ui.theme.DarkBlue
+import ru.nvgsoft.testeffectivemobile.domain.entity.OfferEntity
+import ru.nvgsoft.testeffectivemobile.domain.entity.VacancyEntity
 
 @Composable
 fun VacancyScreen(
-    onVacancyClick: (VacancyModel) -> Unit,
+    onVacancyClick: (VacancyEntity) -> Unit,
     modifier: Modifier = Modifier
 ){
 
     val viewModel: VacancyViewModel = viewModel()
-    val screenState = viewModel.screenState.collectAsState(VacancyScreenState.Initial)
+    val vacancyScreenState = viewModel.vacancyScreenState.collectAsState(VacancyScreenState.Initial)
+    val offerScreenState = viewModel.offerScreenState.collectAsState(OfferScreenState.Initial)
+    val currentVacancyState: VacancyScreenState = vacancyScreenState.value
+    val currentOfferState: OfferScreenState = offerScreenState.value
+
+
+    if ( currentVacancyState is VacancyScreenState.VacancyList && currentOfferState is OfferScreenState.OfferList){
+        VacancyListScreen(
+            viewModel = viewModel,
+            vacancies = currentVacancyState.vacancyList,
+            offers =currentOfferState.offers,
+            onVacancyClick = onVacancyClick,
+            modifier)
+    }
 
 
 
-    when (val currentState  = screenState.value){
-        is VacancyScreenState.VacancyList ->{
-            VacancyListScreen(
-                viewModel = viewModel,
-                vacancies = currentState.vacancyList,
-                offers =currentState.offersList,
-                onVacancyClick = onVacancyClick,
-                modifier)
-
-        }
-
-        VacancyScreenState.Initial -> {}
-        VacancyScreenState.Loading -> {
+        if (currentVacancyState is VacancyScreenState.Loading || currentOfferState is OfferScreenState.Loading){
             Box(modifier = Modifier.fillMaxSize(),
                 contentAlignment = Alignment.Center){
                 CircularProgressIndicator(color = Color.White)
             }
         }
-    }
+ }
 
 
 
-}
+
 
 @Composable
 fun VacancyListScreen(
     viewModel: VacancyViewModel,
-    vacancies: List<VacancyModel>,
-    offers: List<OfferModel>,
-    onVacancyClick: (VacancyModel) -> Unit,
+    vacancies: List<VacancyEntity>,
+    offers: List<OfferEntity>,
+    onVacancyClick: (VacancyEntity) -> Unit,
     modifier: Modifier = Modifier
 ){
     val isShowAllVacancy = rememberSaveable() {
@@ -119,7 +118,7 @@ fun VacancyListScreen(
                 VacancyPreviewCard(
                     it,
                     onFavouriteClick = {vacancy ->
-                        viewModel.changeFavouriteStatus(vacancy)} ,
+                        viewModel.changeFavouriteStatus(vacancy.id)} ,
                     onVacancyCLick = {vacancy ->
                         onVacancyClick(vacancy)
                         },

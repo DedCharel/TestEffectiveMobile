@@ -8,11 +8,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import ru.nvgsoft.testeffectivemobile.domain.entity.VacancyModel
+import ru.nvgsoft.testeffectivemobile.domain.entity.VacancyEntity
 
 @Composable
 fun MainInfoDetail(
-    vacancy: VacancyModel,
+    vacancy: VacancyEntity,
     modifier: Modifier = Modifier
 ){
     Text(

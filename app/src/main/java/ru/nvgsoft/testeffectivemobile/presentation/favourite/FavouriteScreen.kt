@@ -42,7 +42,7 @@ fun FavoriteScreen(
             VacancyPreviewCard(
                 it,
                 onFavouriteClick = { vacancy ->
-                    viewModel.changeFavouriteStatus(vacancy)} ,
+                    viewModel.changeFavouriteStatus(vacancy.id)} ,
                 onVacancyCLick = {},
                 Modifier.padding(bottom = 8.dp)
 

@@ -1,9 +1,5 @@
 package ru.nvgsoft.testeffectivemobile.navigation
 
-import com.google.gson.Gson
-import okio.ByteString.Companion.encode
-import ru.nvgsoft.testeffectivemobile.domain.entity.VacancyModel
-
 sealed class Screen(
     val route: String
 ) {

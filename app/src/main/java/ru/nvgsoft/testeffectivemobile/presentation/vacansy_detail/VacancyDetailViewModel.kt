@@ -3,7 +3,7 @@ package ru.nvgsoft.testeffectivemobile.presentation.vacansy_detail
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import ru.nvgsoft.testeffectivemobile.domain.entity.VacancyModel
+import ru.nvgsoft.testeffectivemobile.domain.entity.VacancyEntity
 
 class VacancyDetailViewModel: ViewModel() {
 
@@ -13,6 +13,6 @@ class VacancyDetailViewModel: ViewModel() {
 
 
     init {
-        _screenState.value = VacancyDetailScreenState.VacancyDetail(VacancyModel())
+        _screenState.value = VacancyDetailScreenState.VacancyDetail(VacancyEntity())
     }
 }

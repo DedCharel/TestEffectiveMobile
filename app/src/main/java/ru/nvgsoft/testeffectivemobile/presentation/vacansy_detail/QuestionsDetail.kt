@@ -16,10 +16,10 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import ru.nvgsoft.testeffectivemobile.R
-import ru.nvgsoft.testeffectivemobile.domain.entity.VacancyModel
+import ru.nvgsoft.testeffectivemobile.domain.entity.VacancyEntity
 
 @Composable
-fun QuestionDetail(vacancy: VacancyModel) {
+fun QuestionDetail(vacancy: VacancyEntity) {
     Text(
         text = stringResource(R.string.ask_question),
         color = Color.White,

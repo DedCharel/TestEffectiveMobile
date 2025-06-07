@@ -14,14 +14,14 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import ru.nvgsoft.testeffectivemobile.R
-import ru.nvgsoft.testeffectivemobile.domain.entity.VacancyModel
+import ru.nvgsoft.testeffectivemobile.domain.entity.VacancyEntity
 
 
 @Composable
 fun VacancyDetailScreen(
     onBackPress: () -> Unit,
     modifier: Modifier = Modifier,
-    vacancy: VacancyModel
+    vacancy: VacancyEntity
 
     ) {
 

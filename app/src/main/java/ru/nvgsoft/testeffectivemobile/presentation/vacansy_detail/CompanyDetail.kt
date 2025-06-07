@@ -23,11 +23,11 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import ru.nvgsoft.testeffectivemobile.R
-import ru.nvgsoft.testeffectivemobile.domain.entity.VacancyModel
+import ru.nvgsoft.testeffectivemobile.domain.entity.VacancyEntity
 
 @Composable
 fun CompanyDetail(
-    vacancy: VacancyModel,
+    vacancy: VacancyEntity,
     modifier: Modifier = Modifier
 ){
     Box(

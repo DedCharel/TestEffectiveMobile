@@ -5,7 +5,7 @@ import androidx.compose.runtime.remember
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
-import ru.nvgsoft.testeffectivemobile.domain.entity.VacancyModel
+import ru.nvgsoft.testeffectivemobile.domain.entity.VacancyEntity
 
 class NavigationState (
     val navHostController: NavHostController
@@ -20,7 +20,7 @@ class NavigationState (
         }
     }
 
-    fun navigateToDetail(vacancy: VacancyModel){
+    fun navigateToDetail(vacancy: VacancyEntity){
         navHostController.navigate(Screen.VacancyDetail.route)
     }
 }

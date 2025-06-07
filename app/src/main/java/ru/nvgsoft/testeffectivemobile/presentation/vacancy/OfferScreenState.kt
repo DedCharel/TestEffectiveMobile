@@ -1,6 +1,6 @@
 package ru.nvgsoft.testeffectivemobile.presentation.vacancy
 
-import ru.nvgsoft.testeffectivemobile.domain.entity.OfferModel
+import ru.nvgsoft.testeffectivemobile.domain.entity.OfferEntity
 
 sealed class OfferScreenState {
 
@@ -8,5 +8,5 @@ sealed class OfferScreenState {
 
     object Loading: OfferScreenState()
 
-    data class OfferList(val offers: List<OfferModel>):OfferScreenState()
+    data class OfferList(val offers: List<OfferEntity>):OfferScreenState()
 }

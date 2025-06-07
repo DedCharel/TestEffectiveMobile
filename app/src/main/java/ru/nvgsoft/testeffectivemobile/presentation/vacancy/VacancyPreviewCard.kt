@@ -26,14 +26,14 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import ru.nvgsoft.testeffectivemobile.R
-import ru.nvgsoft.testeffectivemobile.domain.entity.VacancyModel
+import ru.nvgsoft.testeffectivemobile.domain.entity.VacancyEntity
 import ru.nvgsoft.testeffectivemobile.utils.toFormattedDate
 
 @Composable
 fun VacancyPreviewCard(
-    vacancy: VacancyModel,
-    onFavouriteClick: (VacancyModel)-> Unit,
-    onVacancyCLick: (VacancyModel) -> Unit,
+    vacancy: VacancyEntity,
+    onFavouriteClick: (VacancyEntity)-> Unit,
+    onVacancyCLick: (VacancyEntity) -> Unit,
     modifier: Modifier = Modifier
 ) {
     Card(

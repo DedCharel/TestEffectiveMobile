@@ -4,13 +4,13 @@ import ru.nvgsoft.testeffectivemobile.data.database.OfferDbModel
 import ru.nvgsoft.testeffectivemobile.data.database.VacancyDbModel
 import ru.nvgsoft.testeffectivemobile.data.network.model.OfferDto
 import ru.nvgsoft.testeffectivemobile.data.network.model.VacancyDto
-import ru.nvgsoft.testeffectivemobile.domain.entity.OfferModel
-import ru.nvgsoft.testeffectivemobile.domain.entity.VacancyModel
+import ru.nvgsoft.testeffectivemobile.domain.entity.OfferEntity
+import ru.nvgsoft.testeffectivemobile.domain.entity.VacancyEntity
 
 class Mapper {
 
-    fun mapDtoModelVacancyToEntity(dto: VacancyDto): VacancyModel {
-        return VacancyModel(
+    fun mapDtoModelVacancyToEntity(dto: VacancyDto): VacancyEntity {
+        return VacancyEntity(
             id = dto.id,
             lookingNumber = dto.lookingNumber,
             title = dto.title,
@@ -32,8 +32,8 @@ class Mapper {
         )
     }
 
-    fun mapDbModelVacancyToEntity(dbModel: VacancyDbModel): VacancyModel {
-        return VacancyModel(
+    fun mapDbModelVacancyToEntity(dbModel: VacancyDbModel): VacancyEntity {
+        return VacancyEntity(
             id = dbModel.id,
             lookingNumber = dbModel.lookingNumber,
             title = dbModel.title,
@@ -55,7 +55,7 @@ class Mapper {
         )
     }
 
-    fun mapEntityVacancyToDbModel(entity: VacancyModel): VacancyDbModel {
+    fun mapEntityVacancyToDbModel(entity: VacancyEntity): VacancyDbModel {
         return VacancyDbModel(
             id = entity.id,
             lookingNumber = entity.lookingNumber,
@@ -78,8 +78,8 @@ class Mapper {
         )
     }
 
-    fun mapDbModelOfferToEntity(dbModel: OfferDbModel): OfferModel {
-        return OfferModel(
+    fun mapDbModelOfferToEntity(dbModel: OfferDbModel): OfferEntity {
+        return OfferEntity(
             id = dbModel.id,
             title = dbModel.title,
             link = dbModel.link,
@@ -89,8 +89,8 @@ class Mapper {
         )
     }
 
-    fun mapDtoModelOfferToEntity(dto: OfferDto): OfferModel {
-        return OfferModel(
+    fun mapDtoModelOfferToEntity(dto: OfferDto): OfferEntity {
+        return OfferEntity(
             id = dto.id,
             title = dto.title.trim(),
             link = dto.link,
@@ -102,11 +102,11 @@ class Mapper {
 
 
 
-    fun mapListDtoModelVacancyToListEntity(list: List<VacancyDto>): List<VacancyModel>{
+    fun mapListDtoModelVacancyToListEntity(list: List<VacancyDto>): List<VacancyEntity>{
         return list.map { mapDtoModelVacancyToEntity(it) }
     }
 
-    fun mapListDtoModelOffersToListEntity(list: List<OfferDto>): List<OfferModel>{
+    fun mapListDtoModelOffersToListEntity(list: List<OfferDto>): List<OfferEntity>{
         return list.map { mapDtoModelOfferToEntity(it) }
     }
 
@@ -152,11 +152,11 @@ class Mapper {
         return list.map { mapDtoModelOfferToDbModel(it) }
     }
 
-    fun mapListDbModelVacancyToEntityList(list: List<VacancyDbModel>): List<VacancyModel>{
+    fun mapListDbModelVacancyToEntityList(list: List<VacancyDbModel>): List<VacancyEntity>{
         return list.map { mapDbModelVacancyToEntity(it) }
     }
 
-    fun mapListDbModelOfferToEntityList(list: List<OfferDbModel>): List<OfferModel>{
+    fun mapListDbModelOfferToEntityList(list: List<OfferDbModel>): List<OfferEntity>{
         return list.map { mapDbModelOfferToEntity(it) }
     }
 }

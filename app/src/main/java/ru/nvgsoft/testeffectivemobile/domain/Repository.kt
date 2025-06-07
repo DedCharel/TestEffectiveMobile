@@ -1,19 +1,16 @@
 package ru.nvgsoft.testeffectivemobile.domain
 
-import android.content.Context
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import ru.nvgsoft.testeffectivemobile.domain.entity.OfferModel
-import ru.nvgsoft.testeffectivemobile.domain.entity.VacancyModel
+import kotlinx.coroutines.flow.StateFlow
+import ru.nvgsoft.testeffectivemobile.domain.entity.OfferEntity
+import ru.nvgsoft.testeffectivemobile.domain.entity.VacancyEntity
 
 interface Repository {
 
-    suspend fun getOffers(context: Context): LiveData<List<OfferModel>>
+    fun getVacancyList(): StateFlow<List<VacancyEntity>>
 
-    suspend fun getVacancies(context: Context) : LiveData<List<VacancyModel>>
+    fun getOfferList(): StateFlow<List<OfferEntity>>
 
+    suspend fun changeFavourite(vacancyId: String)
 
-   suspend fun getVacancy(vacancyId: String, context: Context): LiveData<VacancyModel>
-
-    fun changeFavourite(vacancyId: String)
+    suspend fun loadDataToDatabase()
 }

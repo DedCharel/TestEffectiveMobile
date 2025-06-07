@@ -21,7 +21,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.compose.currentBackStackEntryAsState
-import ru.nvgsoft.testeffectivemobile.domain.entity.VacancyModel
+import ru.nvgsoft.testeffectivemobile.domain.entity.VacancyEntity
 import ru.nvgsoft.testeffectivemobile.navigation.AppNavGraph
 import ru.nvgsoft.testeffectivemobile.navigation.rememberNavigationState
 import ru.nvgsoft.testeffectivemobile.presentation.favourite.FavoriteScreen
@@ -35,7 +35,9 @@ import ru.nvgsoft.testeffectivemobile.presentation.vacansy_detail.VacancyDetailS
 @Composable
 fun MainScreen() {
     val navigationState = rememberNavigationState()
-    val vacancy: MutableState<VacancyModel?> = remember {
+
+    //временное решение , вакансию надо передавать при навигации если будет время переделаю
+    val vacancy: MutableState<VacancyEntity?> = remember {
         mutableStateOf(null)
     }
 

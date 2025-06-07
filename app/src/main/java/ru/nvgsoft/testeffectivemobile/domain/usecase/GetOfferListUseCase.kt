@@ -1,12 +1,12 @@
 package ru.nvgsoft.testeffectivemobile.domain.usecase
 
 import kotlinx.coroutines.flow.StateFlow
-import ru.nvgsoft.testeffectivemobile.data.RepositoryImpl
-import ru.nvgsoft.testeffectivemobile.domain.entity.OfferModel
+import ru.nvgsoft.testeffectivemobile.domain.Repository
+import ru.nvgsoft.testeffectivemobile.domain.entity.OfferEntity
 
-class GetOfferListUseCase(private val repository: RepositoryImpl) {
+class GetOfferListUseCase(private val repository: Repository) {
 
-    operator fun invoke(): StateFlow<List<OfferModel>>{
+    operator fun invoke(): StateFlow<List<OfferEntity>> {
         return repository.getOfferList()
     }
 }

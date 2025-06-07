@@ -3,63 +3,47 @@ package ru.nvgsoft.testeffectivemobile.presentation.vacancy
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.onStart
-import kotlinx.coroutines.flow.zip
 import kotlinx.coroutines.launch
 import ru.nvgsoft.testeffectivemobile.data.RepositoryImpl
-import ru.nvgsoft.testeffectivemobile.domain.entity.OfferModel
-import ru.nvgsoft.testeffectivemobile.domain.entity.VacancyModel
+import ru.nvgsoft.testeffectivemobile.domain.entity.VacancyEntity
+import ru.nvgsoft.testeffectivemobile.domain.usecase.ChangeFavoriteUseCase
+import ru.nvgsoft.testeffectivemobile.domain.usecase.GetOfferListUseCase
+import ru.nvgsoft.testeffectivemobile.domain.usecase.GetVacancyListUseCase
+import ru.nvgsoft.testeffectivemobile.domain.usecase.LoadDataToDatabaseUseCase
 
 class VacancyViewModel(application: Application) : AndroidViewModel(application) {
 
+    private val repository = RepositoryImpl(getApplication())
+    private val getVacancyListUseCase = GetVacancyListUseCase(repository)
+    private val getOfferListUseCase = GetOfferListUseCase(repository)
+    private val loadDataToDatabaseUseCase = LoadDataToDatabaseUseCase(repository)
+    private val changeFavoriteUseCase = ChangeFavoriteUseCase(repository)
 
-
-    private val coroutineScope = CoroutineScope(Dispatchers.Default)
-    private val initOffers = listOf(
-        OfferModel(),
-        OfferModel(
-            id = "level_up_resume",
-            title = "Поднять резюме в поиске",
-            buttonText = "Поднять",
-            link = "https://hh.ru/mentors?from=footer_new&hhtmFromLabel=footer_new&hhtmFrom=main&purposeId=1"
-        ),
-        OfferModel(
-            id = "temporary_job",
-            title = "Временная работа или подработка",
-            link = "https://hh.ru/"
-        )
-    )
-    val repository = RepositoryImpl(getApplication())
-    val vacancyFlow = repository.getVacancyList()
-    val screenState= repository.getOfferList()
-        .combine(vacancyFlow){
-            offerModels, vacancyModels -> VacancyScreenState.VacancyList(vacancyModels, offerModels) as VacancyScreenState
-    }   .onStart { emit(VacancyScreenState.Loading) }
-
-
-
-
+    val vacancyScreenState: Flow<VacancyScreenState> = getVacancyListUseCase()
+        .onStart { VacancyScreenState.Loading }
+        .map { VacancyScreenState.VacancyList(it)  }
+    val offerScreenState: Flow<OfferScreenState> = getOfferListUseCase()
+        .onStart { OfferScreenState.Loading }
+        .map {OfferScreenState.OfferList(it) }
 
 
     private fun loadData() {
         viewModelScope.launch {
-            repository.loadDataToDatabase()
+            loadDataToDatabaseUseCase()
         }
-
     }
 
     init {
+        vacancyScreenState
         loadData()
     }
 
-
-
-    fun changeFavouriteStatus(vac: VacancyModel) {
+    fun changeFavouriteStatus(vacancyId: String) {
         viewModelScope.launch {
-            repository.changeFavourite(vac)
+            changeFavoriteUseCase(vacancyId)
         }
 
 

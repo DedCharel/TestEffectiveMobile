@@ -1,12 +1,12 @@
 package ru.nvgsoft.testeffectivemobile.domain.usecase
 
 import kotlinx.coroutines.flow.StateFlow
-import ru.nvgsoft.testeffectivemobile.data.RepositoryImpl
-import ru.nvgsoft.testeffectivemobile.domain.entity.VacancyModel
+import ru.nvgsoft.testeffectivemobile.domain.Repository
+import ru.nvgsoft.testeffectivemobile.domain.entity.VacancyEntity
 
-class GetVacancyListUseCase(private val repositoryImpl: RepositoryImpl) {
+class GetVacancyListUseCase(private val repository: Repository) {
 
-    operator fun invoke(): StateFlow<List<VacancyModel>>{
-        return repositoryImpl.getVacancyList()
+    operator fun invoke(): StateFlow<List<VacancyEntity>> {
+        return repository.getVacancyList()
     }
 }
