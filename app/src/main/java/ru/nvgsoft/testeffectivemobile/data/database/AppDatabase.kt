@@ -1,4 +1,4 @@
-package ru.nvgsoft.testeffectivemobile.data.db
+package ru.nvgsoft.testeffectivemobile.data.database
 
 import android.app.Application
 import androidx.room.Database

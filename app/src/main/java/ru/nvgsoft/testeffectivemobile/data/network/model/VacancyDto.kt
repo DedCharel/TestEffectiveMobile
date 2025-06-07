@@ -1,7 +1,4 @@
-package ru.nvgsoft.testeffectivemobile.data.network.dto
-
-import androidx.compose.runtime.Immutable
-import kotlinx.parcelize.Parcelize
+package ru.nvgsoft.testeffectivemobile.data.network.model
 
 
 data class VacancyDto(

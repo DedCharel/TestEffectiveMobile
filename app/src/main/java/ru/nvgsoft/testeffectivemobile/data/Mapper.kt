@@ -1,9 +1,9 @@
 package ru.nvgsoft.testeffectivemobile.data
 
-import ru.nvgsoft.testeffectivemobile.data.db.OfferDbModel
-import ru.nvgsoft.testeffectivemobile.data.db.VacancyDbModel
-import ru.nvgsoft.testeffectivemobile.data.network.dto.OfferDto
-import ru.nvgsoft.testeffectivemobile.data.network.dto.VacancyDto
+import ru.nvgsoft.testeffectivemobile.data.database.OfferDbModel
+import ru.nvgsoft.testeffectivemobile.data.database.VacancyDbModel
+import ru.nvgsoft.testeffectivemobile.data.network.model.OfferDto
+import ru.nvgsoft.testeffectivemobile.data.network.model.VacancyDto
 import ru.nvgsoft.testeffectivemobile.domain.entity.OfferModel
 import ru.nvgsoft.testeffectivemobile.domain.entity.VacancyModel
 
@@ -32,10 +32,67 @@ class Mapper {
         )
     }
 
+    fun mapDbModelVacancyToEntity(dbModel: VacancyDbModel): VacancyModel {
+        return VacancyModel(
+            id = dbModel.id,
+            lookingNumber = dbModel.lookingNumber,
+            title = dbModel.title,
+            addressTown = dbModel.addressTown,
+            addressStreet = dbModel.addressStreet,
+            addressHouse = dbModel.addressHouse,
+            company = dbModel.company,
+            experiencePreviewText = dbModel.experiencePreviewText,
+            experienceText = dbModel.experienceText,
+            publishedDate = dbModel.publishedDate,
+            isFavorite = dbModel.isFavorite,
+            salaryFull = dbModel.salaryFull,
+            schedules = dbModel.schedules,
+            appliedNumber = dbModel.appliedNumber,
+            description = dbModel.description,
+            responsibilities = dbModel.responsibilities,
+            questions = dbModel.questions
+
+        )
+    }
+
+    fun mapEntityVacancyToDbModel(entity: VacancyModel): VacancyDbModel {
+        return VacancyDbModel(
+            id = entity.id,
+            lookingNumber = entity.lookingNumber,
+            title = entity.title,
+            addressTown = entity.addressTown,
+            addressStreet = entity.addressStreet,
+            addressHouse = entity.addressHouse,
+            company = entity.company,
+            experiencePreviewText = entity.experiencePreviewText,
+            experienceText = entity.experienceText,
+            publishedDate = entity.publishedDate,
+            isFavorite = entity.isFavorite,
+            salaryFull = entity.salaryFull,
+            schedules = entity.schedules,
+            appliedNumber = entity.appliedNumber,
+            description = entity.description,
+            responsibilities = entity.responsibilities,
+            questions = entity.questions
+
+        )
+    }
+
+    fun mapDbModelOfferToEntity(dbModel: OfferDbModel): OfferModel {
+        return OfferModel(
+            id = dbModel.id,
+            title = dbModel.title,
+            link = dbModel.link,
+            buttonText = dbModel.buttonText
+
+
+        )
+    }
+
     fun mapDtoModelOfferToEntity(dto: OfferDto): OfferModel {
         return OfferModel(
             id = dto.id,
-            title = dto.title,
+            title = dto.title.trim(),
             link = dto.link,
             buttonText = dto.button?.text
 
@@ -83,7 +140,7 @@ class Mapper {
     fun mapDtoModelOfferToDbModel(dto: OfferDto): OfferDbModel {
         return OfferDbModel(
             id = dto.id,
-            title = dto.title,
+            title = dto.title.trim(),
             link = dto.link,
             buttonText = dto.button?.text
 
@@ -93,5 +150,13 @@ class Mapper {
 
     fun mapListDtoModelOfferToDBList(list: List<OfferDto>): List<OfferDbModel>{
         return list.map { mapDtoModelOfferToDbModel(it) }
+    }
+
+    fun mapListDbModelVacancyToEntityList(list: List<VacancyDbModel>): List<VacancyModel>{
+        return list.map { mapDbModelVacancyToEntity(it) }
+    }
+
+    fun mapListDbModelOfferToEntityList(list: List<OfferDbModel>): List<OfferModel>{
+        return list.map { mapDbModelOfferToEntity(it) }
     }
 }

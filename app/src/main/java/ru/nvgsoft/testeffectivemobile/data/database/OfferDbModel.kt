@@ -1,4 +1,4 @@
-package ru.nvgsoft.testeffectivemobile.data.db
+package ru.nvgsoft.testeffectivemobile.data.database
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey

@@ -1,4 +1,4 @@
-package ru.nvgsoft.testeffectivemobile.data.network.dto
+package ru.nvgsoft.testeffectivemobile.data.network.model
 
 data class AddressDto(
     val town:String,

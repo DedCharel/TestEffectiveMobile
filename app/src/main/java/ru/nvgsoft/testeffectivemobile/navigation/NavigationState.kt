@@ -21,7 +21,7 @@ class NavigationState (
     }
 
     fun navigateToDetail(vacancy: VacancyModel){
-        navHostController.navigate(Screen.VacancyDetail.getRouteWithArgs(vacancy))
+        navHostController.navigate(Screen.VacancyDetail.route)
     }
 }
 

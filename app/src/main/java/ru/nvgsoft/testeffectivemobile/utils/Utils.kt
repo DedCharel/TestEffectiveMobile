@@ -1,5 +1,7 @@
 package ru.nvgsoft.testeffectivemobile.utils
 
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.merge
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 
@@ -17,4 +19,8 @@ fun String.toFormattedDate(): String {
     } catch (e: Exception) {
         this
     }
+}
+
+fun <T> Flow<T>.mergeWith(another: Flow<T>): Flow<T> {
+    return merge(this, another)
 }

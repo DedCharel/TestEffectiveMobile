@@ -1,15 +1,7 @@
-package ru.nvgsoft.testeffectivemobile.data.db
+package ru.nvgsoft.testeffectivemobile.data.database
 
-import android.os.Bundle
-import android.os.Parcelable
-import androidx.compose.runtime.Immutable
-import androidx.navigation.NavType
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import androidx.room.TypeConverter
-import androidx.room.TypeConverters
-import com.google.gson.Gson
-import kotlinx.parcelize.Parcelize
 
 @Entity(tableName = "vacancy")
 data class VacancyDbModel(
@@ -27,7 +19,7 @@ data class VacancyDbModel(
     val salaryFull: String,
     val schedules: List<String>,
     val appliedNumber: Int,
-    val description: String,
+    val description: String?,
     val responsibilities: String ,
 
     val questions: List<String>,

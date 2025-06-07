@@ -1,7 +1,7 @@
 package ru.nvgsoft.testeffectivemobile.data.network
 
 import retrofit2.http.GET
-import ru.nvgsoft.testeffectivemobile.data.network.dto.ResponseDto
+import ru.nvgsoft.testeffectivemobile.data.network.model.ResponseDto
 
 interface ApiService {
 

@@ -1,6 +1,7 @@
 package ru.nvgsoft.testeffectivemobile.presentation.vacancy
 
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
@@ -9,12 +10,15 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
@@ -24,6 +28,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import ru.nvgsoft.testeffectivemobile.R
 import ru.nvgsoft.testeffectivemobile.domain.entity.OfferModel
 import ru.nvgsoft.testeffectivemobile.domain.entity.VacancyModel
+import ru.nvgsoft.testeffectivemobile.ui.theme.DarkBlue
 
 @Composable
 fun VacancyScreen(
@@ -32,7 +37,7 @@ fun VacancyScreen(
 ){
 
     val viewModel: VacancyViewModel = viewModel()
-    val screenState = viewModel.screenState.observeAsState(VacancyScreenState.Initial)
+    val screenState = viewModel.screenState.collectAsState(VacancyScreenState.Initial)
 
 
 
@@ -48,6 +53,12 @@ fun VacancyScreen(
         }
 
         VacancyScreenState.Initial -> {}
+        VacancyScreenState.Loading -> {
+            Box(modifier = Modifier.fillMaxSize(),
+                contentAlignment = Alignment.Center){
+                CircularProgressIndicator(color = Color.White)
+            }
+        }
     }
 
 
@@ -65,6 +76,7 @@ fun VacancyListScreen(
     val isShowAllVacancy = rememberSaveable() {
         mutableStateOf(false)
     }
+    val currentVacancies = if (vacancies.size > 2 && !isShowAllVacancy.value) vacancies.take(3) else vacancies
 
     Box(modifier = modifier){
 
@@ -103,11 +115,11 @@ fun VacancyListScreen(
                 )
             }
 
-            items(vacancies, key = { it.id}){
+            items(currentVacancies, key = { it.id}){
                 VacancyPreviewCard(
                     it,
                     onFavouriteClick = {vacancy ->
-                        viewModel.changeFavourite(vacancy)} ,
+                        viewModel.changeFavouriteStatus(vacancy)} ,
                     onVacancyCLick = {vacancy ->
                         onVacancyClick(vacancy)
                         },

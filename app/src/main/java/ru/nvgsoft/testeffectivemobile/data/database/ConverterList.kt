@@ -1,4 +1,4 @@
-package ru.nvgsoft.testeffectivemobile.data.db
+package ru.nvgsoft.testeffectivemobile.data.database
 
 import androidx.room.TypeConverter
 import java.util.stream.Collectors

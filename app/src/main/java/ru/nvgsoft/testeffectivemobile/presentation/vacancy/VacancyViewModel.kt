@@ -2,28 +2,22 @@ package ru.nvgsoft.testeffectivemobile.presentation.vacancy
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.onStart
+import kotlinx.coroutines.flow.zip
 import kotlinx.coroutines.launch
-import ru.nvgsoft.testeffectivemobile.data.Mapper
 import ru.nvgsoft.testeffectivemobile.data.RepositoryImpl
-import ru.nvgsoft.testeffectivemobile.data.network.ApiFactory
-import ru.nvgsoft.testeffectivemobile.data.network.ApiService
 import ru.nvgsoft.testeffectivemobile.domain.entity.OfferModel
 import ru.nvgsoft.testeffectivemobile.domain.entity.VacancyModel
 
 class VacancyViewModel(application: Application) : AndroidViewModel(application) {
 
-    private val sourceList = listOf(
-        VacancyModel(),
-        VacancyModel(id = "111"),
-        VacancyModel(id = "222"),
-        VacancyModel(id = "333")
-    )
 
 
+    private val coroutineScope = CoroutineScope(Dispatchers.Default)
     private val initOffers = listOf(
         OfferModel(),
         OfferModel(
@@ -37,35 +31,37 @@ class VacancyViewModel(application: Application) : AndroidViewModel(application)
             title = "Временная работа или подработка",
             link = "https://hh.ru/"
         )
-
     )
+    val repository = RepositoryImpl(getApplication())
+    val vacancyFlow = repository.getVacancyList()
+    val screenState= repository.getOfferList()
+        .combine(vacancyFlow){
+            offerModels, vacancyModels -> VacancyScreenState.VacancyList(vacancyModels, offerModels) as VacancyScreenState
+    }   .onStart { emit(VacancyScreenState.Loading) }
 
-    val maper = Mapper()
 
 
-    private val vacancyState:VacancyScreenState = VacancyScreenState.Initial
 
-    private val _screenState = MutableLiveData<VacancyScreenState>(vacancyState)
-    val screenState: LiveData<VacancyScreenState> = _screenState
+
+
+    private fun loadData() {
+        viewModelScope.launch {
+            repository.loadDataToDatabase()
+        }
+
+    }
 
     init {
         loadData()
     }
 
-    private fun loadData() {
-        viewModelScope.launch {
-            val response = ApiFactory.apiService.getData()
-            val vacancies = maper.mapListDtoModelVacancyToListEntity(response.vacancies)
-            val offers = maper.mapListDtoModelOffersToListEntity(response.offers)
 
-            _screenState.value = VacancyScreenState.VacancyList(vacancies, offers)
+
+    fun changeFavouriteStatus(vac: VacancyModel) {
+        viewModelScope.launch {
+            repository.changeFavourite(vac)
         }
 
-    }
-
-
-    fun changeFavourite(vac: VacancyModel) {
-        //TODO
 
     }
 }
