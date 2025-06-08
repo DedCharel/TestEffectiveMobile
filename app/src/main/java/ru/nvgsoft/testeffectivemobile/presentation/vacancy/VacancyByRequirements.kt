@@ -15,6 +15,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import ru.nvgsoft.testeffectivemobile.R
+import ru.nvgsoft.testeffectivemobile.utils.declensionVacancy
 
 
 @Composable
@@ -25,7 +26,8 @@ fun VacancyByRequirements(
     Row (
         modifier = modifier.fillMaxWidth(),
         horizontalArrangement = Arrangement.SpaceBetween){
-        Text(text = "$size вакансий", color = Color.White, fontSize = 14.sp)
+        val vac = declensionVacancy(size)
+        Text(text = "$size $vac", color = Color.White, fontSize = 14.sp)
         Row(){
             Text(text = "По соотвествию", color = Color.Blue,  fontSize = 14.sp)
             Spacer(modifier = Modifier.size(8.dp))

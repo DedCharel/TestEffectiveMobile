@@ -10,7 +10,7 @@ interface Repository {
 
     fun getOfferList(): StateFlow<List<OfferEntity>>
 
-    suspend fun changeFavourite(vacancyId: String)
+    suspend fun changeFavourite(vacancyEntity: VacancyEntity)
 
     suspend fun loadDataToDatabase()
 }

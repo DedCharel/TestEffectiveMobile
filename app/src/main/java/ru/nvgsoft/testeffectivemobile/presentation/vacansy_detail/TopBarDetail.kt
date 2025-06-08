@@ -11,6 +11,9 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -23,9 +26,14 @@ import ru.nvgsoft.testeffectivemobile.domain.entity.VacancyEntity
 fun TopBarDetail(
    vacancy: VacancyEntity,
     onBackPress: () -> Unit,
-    onFavoriteClick: (String) ->Unit,
+    onFavoriteClick: (VacancyEntity) ->Unit,
     modifier: Modifier = Modifier
 ) {
+
+    //временное решение нужно обновлять вакансию через flow
+    val isFavourite: MutableState<Boolean> = remember {
+        mutableStateOf(vacancy.isFavorite)
+    }
 
     Row(
         modifier = modifier
@@ -58,13 +66,14 @@ fun TopBarDetail(
 
                 var iconFavorite = painterResource(R.drawable.ic_heart)
                 var tintColor = Color.White
-                if (vacancy.isFavorite) {
+                if (isFavourite.value) {
                     tintColor = MaterialTheme.colorScheme.onPrimary
                     iconFavorite = painterResource(R.drawable.ic_heart2)
                 }
                 Icon(
                     modifier = Modifier.clickable {
-                        onFavoriteClick(vacancy.id)
+                        isFavourite.value = !isFavourite.value
+                        onFavoriteClick(vacancy)
                     },
                     painter = iconFavorite,
                     contentDescription = null,

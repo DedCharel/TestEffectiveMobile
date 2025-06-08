@@ -6,6 +6,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.launch
+import ru.nvgsoft.testeffectivemobile.domain.entity.VacancyEntity
 import ru.nvgsoft.testeffectivemobile.domain.usecase.ChangeFavoriteUseCase
 import ru.nvgsoft.testeffectivemobile.domain.usecase.GetOfferListUseCase
 import ru.nvgsoft.testeffectivemobile.domain.usecase.GetVacancyListUseCase
@@ -39,9 +40,9 @@ class VacancyViewModel @Inject constructor(
         loadData()
     }
 
-    fun changeFavouriteStatus(vacancyId: String) {
+    fun changeFavouriteStatus(vacancy: VacancyEntity) {
         viewModelScope.launch {
-            changeFavoriteUseCase(vacancyId)
+            changeFavoriteUseCase(vacancy)
         }
 
 

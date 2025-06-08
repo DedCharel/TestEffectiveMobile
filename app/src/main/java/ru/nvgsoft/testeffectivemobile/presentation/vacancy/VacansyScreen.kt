@@ -29,6 +29,7 @@ import ru.nvgsoft.testeffectivemobile.domain.entity.OfferEntity
 import ru.nvgsoft.testeffectivemobile.domain.entity.VacancyEntity
 import ru.nvgsoft.testeffectivemobile.presentation.ViewModelFactory
 import ru.nvgsoft.testeffectivemobile.presentation.getApplicationComponent
+import ru.nvgsoft.testeffectivemobile.utils.declensionVacancy
 
 @Composable
 fun VacancyScreen(
@@ -125,7 +126,7 @@ fun VacancyListScreen(
                 VacancyPreviewCard(
                     it,
                     onFavouriteClick = { vacancy ->
-                        viewModel.changeFavouriteStatus(vacancy.id)
+                        viewModel.changeFavouriteStatus(vacancy)
                     },
                     onVacancyCLick = { vacancy ->
                         onVacancyClick(vacancy)
@@ -151,8 +152,8 @@ fun VacancyListScreen(
                             .fillMaxWidth(),
                         onClick = { isShowAllVacancy.value = !isShowAllVacancy.value },
                     ) {
-                        val size = vacancies.size
-                        Text(text = "Еще ${size - 3} вакансии")
+                        val size = vacancies.size -3
+                        Text(text = "Еще ${size} ${declensionVacancy(size)}")
                     }
                 }
 

@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
+import ru.nvgsoft.testeffectivemobile.domain.entity.VacancyEntity
 import ru.nvgsoft.testeffectivemobile.domain.usecase.ChangeFavoriteUseCase
 import ru.nvgsoft.testeffectivemobile.domain.usecase.GetVacancyListUseCase
 import javax.inject.Inject
@@ -20,9 +21,9 @@ class FavouriteViewModel @Inject constructor(
         }
 
 
-    fun changeFavouriteStatus(vacancyId: String) {
+    fun changeFavouriteStatus(vacancy: VacancyEntity) {
         viewModelScope.launch {
-            changeFavoriteUseCase(vacancyId)
+            changeFavoriteUseCase(vacancy)
         }
 
 

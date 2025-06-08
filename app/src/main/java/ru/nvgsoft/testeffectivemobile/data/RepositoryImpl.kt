@@ -1,6 +1,7 @@
 package ru.nvgsoft.testeffectivemobile.data
 
 import android.app.Application
+import android.util.Log
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableSharedFlow
@@ -83,11 +84,12 @@ class RepositoryImpl @Inject constructor(
 
     }
 
-    override suspend fun changeFavourite(vacancyId: String) {
-        val currentVacancy = mapper.mapDbModelVacancyToEntity(dao.getVacancy(vacancyId))
-        val oldVacancy = currentVacancy
-        val index = _vacancy.indexOf(currentVacancy)
-        val newVacancy = currentVacancy.copy(isFavorite = !oldVacancy.isFavorite)
+    override suspend fun changeFavourite(vacancyEntity: VacancyEntity) {
+
+        val oldVacancy = vacancyEntity
+        val index = _vacancy.indexOf(vacancyEntity)
+        Log.d("RepositoryImpl","index $index vacancyId $vacancy")
+        val newVacancy = vacancyEntity.copy(isFavorite = !oldVacancy.isFavorite)
         dao.addVacancy(mapper.mapEntityVacancyToDbModel(newVacancy))
         _vacancy[index] = newVacancy
         refreshedListFlow.emit(vacancy)

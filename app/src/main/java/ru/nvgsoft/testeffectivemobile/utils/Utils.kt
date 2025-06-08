@@ -24,3 +24,23 @@ fun String.toFormattedDate(): String {
 fun <T> Flow<T>.mergeWith(another: Flow<T>): Flow<T> {
     return merge(this, another)
 }
+fun declension( number: Int, one: String, two:String, five: String): String{
+    var n = Math.abs(number)
+    n %= 100
+    if (n in 5..20) {
+        return five
+    }
+    n %= 10
+    if (n === 1) {
+        return one
+    }
+    if (n in 2..4) {
+        return two
+    }
+    return five
+
+}
+
+fun declensionVacancy(number: Int): String{
+    return declension(number, "вакансия", "вакансии", "вакансий")
+}

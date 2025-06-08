@@ -16,6 +16,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import ru.nvgsoft.testeffectivemobile.presentation.ViewModelFactory
 import ru.nvgsoft.testeffectivemobile.presentation.getApplicationComponent
 import ru.nvgsoft.testeffectivemobile.presentation.vacancy.VacancyPreviewCard
+import ru.nvgsoft.testeffectivemobile.utils.declensionVacancy
 
 @Composable
 fun FavoriteScreen(
@@ -35,7 +36,7 @@ fun FavoriteScreen(
         }
 
         item {
-            Text(text = "$size вакансий", color = Color.Gray, fontSize = 14.sp)
+            Text(text = "$size ${declensionVacancy(size ?:0)}", color = Color.Gray, fontSize = 14.sp)
         }
         item {
             Spacer(modifier = Modifier.height(8.dp))
@@ -44,7 +45,7 @@ fun FavoriteScreen(
             VacancyPreviewCard(
                 it,
                 onFavouriteClick = { vacancy ->
-                    viewModel.changeFavouriteStatus(vacancy.id)} ,
+                    viewModel.changeFavouriteStatus(vacancy)} ,
                 onVacancyCLick = {},
                 Modifier.padding(bottom = 8.dp)
 
