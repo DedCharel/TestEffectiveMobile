@@ -81,7 +81,7 @@ fun VacancyListScreen(
     }
     val currentVacancies =
         if (vacancies.size > 2 && !isShowAllVacancy.value) vacancies.take(3) else vacancies
-
+    //TODO Реализовать через подгрузку данных
     Box(modifier = modifier) {
 
         LazyColumn() {
@@ -136,7 +136,8 @@ fun VacancyListScreen(
             }
 
             item {
-                if (!isShowAllVacancy.value) {
+
+                if (!isShowAllVacancy.value && vacancies.size > 3 ) {
                     Button(
                         colors = ButtonDefaults.buttonColors(
                             contentColor = Color.White,
@@ -152,6 +153,7 @@ fun VacancyListScreen(
                             .fillMaxWidth(),
                         onClick = { isShowAllVacancy.value = !isShowAllVacancy.value },
                     ) {
+
                         val size = vacancies.size -3
                         Text(text = "Еще ${size} ${declensionVacancy(size)}")
                     }

@@ -79,18 +79,24 @@ fun VacancyPreviewCard(
                     Text(
                         text = "Сейчас просматривает ${vacancy.lookingNumber} человек",
                         color = MaterialTheme.colorScheme.onSurface,
-                        fontSize = 14.sp
+                        style = MaterialTheme.typography.bodyMedium
                     )
                 }
                 Text(
                     text = vacancy.title,
-                    fontSize = 16.sp,
+                    style = MaterialTheme.typography.titleMedium,
                     color = Color.White
                 )
                 Column {
-                    Text(text = vacancy.addressTown, fontSize = 14.sp, color = Color.White)
+                    Text(
+                        text = vacancy.addressTown,
+                        style = MaterialTheme.typography.bodyMedium,
+                        color = Color.White)
                     Row {
-                        Text(text = vacancy.company, fontSize = 14.sp, color = Color.White)
+                        Text(
+                            text = vacancy.company,
+                            style = MaterialTheme.typography.bodyMedium,
+                            color = Color.White)
                         Image(
                             modifier = Modifier
                                 .padding(start = 8.dp)
@@ -110,12 +116,15 @@ fun VacancyPreviewCard(
                     Text(
                         modifier = Modifier.padding(start = 8.dp),
                         text = vacancy.experiencePreviewText,
-                        fontSize = 14.sp,
+                        style = MaterialTheme.typography.bodyMedium,
                         color = Color.White
                     )
                 }
 
-                Text(text = "Опубликованно ${vacancy.publishedDate.toFormattedDate()}")
+                Text(
+                    text = "Опубликованно ${vacancy.publishedDate.toFormattedDate()}",
+                    style = MaterialTheme.typography.bodyMedium,
+                )
             }
         }
 
@@ -130,7 +139,7 @@ fun VacancyPreviewCard(
             )
         )
         {
-            Text(text = stringResource(R.string.response))
+            Text(text = stringResource(R.string.response), style = MaterialTheme.typography.labelMedium,)
         }
 
 

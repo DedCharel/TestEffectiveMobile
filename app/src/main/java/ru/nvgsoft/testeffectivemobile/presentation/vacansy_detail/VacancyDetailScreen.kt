@@ -61,7 +61,10 @@ fun VacancyDetailScreen(
                 onClick = { },
             ) {
 
-                Text(text = stringResource(R.string.response))
+                Text(
+                    text = stringResource(R.string.response),
+                    style = MaterialTheme.typography.labelLarge
+                )
             }
 
         }

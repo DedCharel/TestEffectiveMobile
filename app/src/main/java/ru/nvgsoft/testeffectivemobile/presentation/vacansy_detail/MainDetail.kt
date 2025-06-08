@@ -2,6 +2,7 @@ package ru.nvgsoft.testeffectivemobile.presentation.vacansy_detail
 
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -19,7 +20,7 @@ fun MainInfoDetail(
         modifier = modifier,
         text = vacancy.title,
         color = Color.White,
-        fontSize = 22.sp
+        style = MaterialTheme.typography.displayLarge
     )
     Spacer(modifier = Modifier.height(20.dp))
 
@@ -27,7 +28,7 @@ fun MainInfoDetail(
             modifier = modifier,
             text = vacancy.salaryFull,
             color = Color.White,
-            fontSize = 14.sp
+            style = MaterialTheme.typography.bodyMedium
         )
         Spacer(modifier = Modifier.height(8.dp))
 
@@ -35,7 +36,7 @@ fun MainInfoDetail(
         modifier = modifier,
         text = "Требуемый опыт: ${vacancy.experiencePreviewText}",
         color = Color.White,
-        fontSize = 14.sp
+        style = MaterialTheme.typography.bodyMedium
     )
     Spacer(modifier = Modifier.height(8.dp))
 
@@ -44,7 +45,7 @@ fun MainInfoDetail(
         modifier = modifier,
         text = vacancy.schedules.joinToString(),
         color = Color.White,
-        fontSize = 14.sp
+        style = MaterialTheme.typography.bodyMedium
     )
     Spacer(modifier = Modifier.height(16.dp))
 }

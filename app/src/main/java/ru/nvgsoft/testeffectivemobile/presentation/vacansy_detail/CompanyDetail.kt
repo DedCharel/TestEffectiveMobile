@@ -43,7 +43,7 @@ fun CompanyDetail(
                 Text(
                     text = vacancy.company,
                     color = Color.White,
-                    fontSize = 16.sp
+                    style = MaterialTheme.typography.titleMedium
                 )
                 Spacer(modifier = Modifier.width(8.dp))
                 Icon(
@@ -65,7 +65,7 @@ fun CompanyDetail(
             Text(
                 text = "${vacancy.addressTown}, ${vacancy.addressStreet}, ${vacancy.addressHouse}",
                 color = Color.White,
-                fontSize = 14.sp
+                style = MaterialTheme.typography.bodyMedium
             )
             Spacer(modifier = Modifier.height(8.dp))
         }

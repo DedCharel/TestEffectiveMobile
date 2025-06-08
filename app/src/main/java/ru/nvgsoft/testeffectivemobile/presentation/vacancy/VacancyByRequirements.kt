@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -27,9 +28,16 @@ fun VacancyByRequirements(
         modifier = modifier.fillMaxWidth(),
         horizontalArrangement = Arrangement.SpaceBetween){
         val vac = declensionVacancy(size)
-        Text(text = "$size $vac", color = Color.White, fontSize = 14.sp)
+        Text(text = "$size $vac",
+            color = Color.White,
+            style = MaterialTheme.typography.bodyMedium
+        )
         Row(){
-            Text(text = "По соотвествию", color = Color.Blue,  fontSize = 14.sp)
+            Text(
+                text = "По соотвествию",
+                color = Color.Blue,
+                style = MaterialTheme.typography.bodyMedium
+                )
             Spacer(modifier = Modifier.size(8.dp))
             Icon( painter = painterResource(id = R.drawable.ic_sort),
                 contentDescription = null,

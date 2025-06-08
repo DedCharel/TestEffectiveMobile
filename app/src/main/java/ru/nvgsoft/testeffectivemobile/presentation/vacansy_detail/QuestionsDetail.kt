@@ -23,13 +23,13 @@ fun QuestionDetail(vacancy: VacancyEntity) {
     Text(
         text = stringResource(R.string.ask_question),
         color = Color.White,
-        fontSize = 14.sp
+        style = MaterialTheme.typography.titleSmall
     )
     Spacer(modifier = Modifier.height(8.dp))
     Text(
         text = stringResource(R.string.question_with_response),
         color = Color.Gray,
-        fontSize = 14.sp
+        style = MaterialTheme.typography.titleSmall
     )
     Spacer(modifier = Modifier.height(12.dp))
     Column {
@@ -45,7 +45,7 @@ fun QuestionDetail(vacancy: VacancyEntity) {
                 Text(
                     text = it,
                     color = Color.White,
-                    fontSize = 14.sp
+                    style = MaterialTheme.typography.titleSmall
                 )
             }
             Spacer(modifier = Modifier.height(8.dp))

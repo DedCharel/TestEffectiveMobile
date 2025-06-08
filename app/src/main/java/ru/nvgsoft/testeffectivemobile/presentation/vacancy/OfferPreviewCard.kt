@@ -67,9 +67,15 @@ fun OfferPreviewCard(
         Column(
             modifier = Modifier.padding(start = 8.dp)
         ) {
-            Text(text = offer.title, fontSize = 14.sp, color = Color.White)
+            Text(
+                text = offer.title,
+                style = MaterialTheme.typography.titleSmall,
+                color = Color.White)
             if (offer.buttonText != null){
-                Text(text = offer.buttonText, fontSize = 14.sp, color = MaterialTheme.colorScheme.onSurface)
+                Text(
+                    text = offer.buttonText,
+                    style = MaterialTheme.typography.bodyMedium,
+                    color = MaterialTheme.colorScheme.onSurface)
             }
 
         }

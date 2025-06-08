@@ -43,7 +43,7 @@ fun ApplyDetails(
             Text(
                 text = "${vacancy.appliedNumber} человек уже откликнулось",
                 color = Color.White,
-                fontSize = 14.sp
+                style = MaterialTheme.typography.bodyMedium
             )
             Icon(
                 painterResource(id = R.drawable.ic_profile),
@@ -68,7 +68,7 @@ fun ApplyDetails(
             Text(
                 text = "${vacancy.lookingNumber} человека сейчас смотрят",
                 color = Color.White,
-                fontSize = 14.sp
+                style = MaterialTheme.typography.bodyMedium
             )
             Icon(
                 painterResource(id = R.drawable.ic_eyes),
