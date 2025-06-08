@@ -20,7 +20,7 @@ class VacancyViewModel @Inject constructor(
     private val changeFavoriteUseCase: ChangeFavoriteUseCase
 ) : ViewModel() {
 
-    //TODO Доработать прогресс бар не отображет
+
     val vacancyScreenState: Flow<VacancyScreenState> = getVacancyListUseCase()
         .onStart { VacancyScreenState.Loading }
         .map { VacancyScreenState.VacancyList(it) }

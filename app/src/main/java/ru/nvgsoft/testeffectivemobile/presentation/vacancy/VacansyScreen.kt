@@ -53,11 +53,7 @@ fun VacancyScreen(
             onVacancyClick = onVacancyClick,
             modifier
         )
-    }
-
-
-
-    if (currentVacancyState is VacancyScreenState.Loading || currentOfferState is OfferScreenState.Loading) {
+    }else {
         Box(
             modifier = Modifier.fillMaxSize(),
             contentAlignment = Alignment.Center
