@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -16,10 +17,13 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import ru.nvgsoft.testeffectivemobile.R
+import ru.nvgsoft.testeffectivemobile.domain.entity.VacancyEntity
 
 @Composable
 fun TopBarDetail(
+   vacancy: VacancyEntity,
     onBackPress: () -> Unit,
+    onFavoriteClick: (String) ->Unit,
     modifier: Modifier = Modifier
 ) {
 
@@ -50,10 +54,21 @@ fun TopBarDetail(
                     tint = Color.White
                 )
                 Spacer(modifier = Modifier.width(12.dp))
+
+
+                var iconFavorite = painterResource(R.drawable.ic_heart)
+                var tintColor = Color.White
+                if (vacancy.isFavorite) {
+                    tintColor = MaterialTheme.colorScheme.onPrimary
+                    iconFavorite = painterResource(R.drawable.ic_heart2)
+                }
                 Icon(
-                    painter = painterResource(R.drawable.ic_heart),
+                    modifier = Modifier.clickable {
+                        onFavoriteClick(vacancy.id)
+                    },
+                    painter = iconFavorite,
                     contentDescription = null,
-                    tint = Color.White
+                    tint = tintColor
                 )
             }
         }

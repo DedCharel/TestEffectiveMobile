@@ -105,10 +105,9 @@ fun MainScreen() {
             vacancyDetailScreenContent = {
                 VacancyDetailScreen(
                     onBackPress = {
-                    navigationState.navHostController.popBackStack()
-                                                  },
+                    navigationState.navHostController.popBackStack() },
                     Modifier.padding(padding),
-                    vacancy= vacancy.value!!
+                    vacancy= vacancy.value ?: throw RuntimeException(" Vacancy is null")
                 )
             },
             favouriteScreenContent = { FavoriteScreen(Modifier.padding(padding)) },

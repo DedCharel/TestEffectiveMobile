@@ -13,21 +13,32 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import ru.nvgsoft.testeffectivemobile.R
 import ru.nvgsoft.testeffectivemobile.domain.entity.VacancyEntity
+import ru.nvgsoft.testeffectivemobile.presentation.getApplicationComponent
 
 
 @Composable
 fun VacancyDetailScreen(
+
     onBackPress: () -> Unit,
     modifier: Modifier = Modifier,
     vacancy: VacancyEntity
 
     ) {
 
+    val component = getApplicationComponent()
+    val viewModel: VacancyDetailViewModel = viewModel(factory = component.getViewModelFactory())
     LazyColumn(modifier.padding(start = 16.dp, end = 16.dp)) {
         item {
-            TopBarDetail(onBackPress)
+            TopBarDetail(
+                vacancy = vacancy,
+                onFavoriteClick = {
+                    viewModel.changeFavouriteStatus(it)
+                },
+                onBackPress = onBackPress
+            )
             MainInfoDetail(vacancy)
             ApplyDetails(vacancy)
             CompanyDetail(vacancy)

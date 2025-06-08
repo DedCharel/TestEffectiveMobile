@@ -54,7 +54,9 @@ fun VacancyPreviewCard(
                 .wrapContentHeight()
         ) {
             var iconFavorite = painterResource(R.drawable.ic_heart)
+            var tintColor = Color.Gray
             if (vacancy.isFavorite) {
+                tintColor = MaterialTheme.colorScheme.onPrimary
                iconFavorite = painterResource(R.drawable.ic_heart2)
             }
             Icon(
@@ -64,6 +66,7 @@ fun VacancyPreviewCard(
                     .padding(top = 16.dp, end = 16.dp)
                     .size(24.dp)
                     .clickable { onFavouriteClick(vacancy) },
+                tint = tintColor,
                 contentDescription = null
             )
             Column(

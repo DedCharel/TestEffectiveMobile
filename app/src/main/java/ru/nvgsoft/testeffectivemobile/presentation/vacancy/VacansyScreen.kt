@@ -34,7 +34,7 @@ import ru.nvgsoft.testeffectivemobile.presentation.getApplicationComponent
 fun VacancyScreen(
     onVacancyClick: (VacancyEntity) -> Unit,
     modifier: Modifier = Modifier
-){
+) {
 
     val component = getApplicationComponent()
     val viewModel: VacancyViewModel = viewModel(factory = component.getViewModelFactory())
@@ -44,27 +44,27 @@ fun VacancyScreen(
     val currentOfferState: OfferScreenState = offerScreenState.value
 
 
-    if ( currentVacancyState is VacancyScreenState.VacancyList && currentOfferState is OfferScreenState.OfferList){
+    if (currentVacancyState is VacancyScreenState.VacancyList && currentOfferState is OfferScreenState.OfferList) {
         VacancyListScreen(
             viewModel = viewModel,
             vacancies = currentVacancyState.vacancyList,
-            offers =currentOfferState.offers,
+            offers = currentOfferState.offers,
             onVacancyClick = onVacancyClick,
-            modifier)
+            modifier
+        )
     }
 
 
 
-        if (currentVacancyState is VacancyScreenState.Loading || currentOfferState is OfferScreenState.Loading){
-            Box(modifier = Modifier.fillMaxSize(),
-                contentAlignment = Alignment.Center){
-                CircularProgressIndicator(color = Color.White)
-            }
+    if (currentVacancyState is VacancyScreenState.Loading || currentOfferState is OfferScreenState.Loading) {
+        Box(
+            modifier = Modifier.fillMaxSize(),
+            contentAlignment = Alignment.Center
+        ) {
+            CircularProgressIndicator(color = Color.White)
         }
- }
-
-
-
+    }
+}
 
 
 @Composable
@@ -74,33 +74,37 @@ fun VacancyListScreen(
     offers: List<OfferEntity>,
     onVacancyClick: (VacancyEntity) -> Unit,
     modifier: Modifier = Modifier
-){
+) {
     val isShowAllVacancy = rememberSaveable() {
         mutableStateOf(false)
     }
-    val currentVacancies = if (vacancies.size > 2 && !isShowAllVacancy.value) vacancies.take(3) else vacancies
+    val currentVacancies =
+        if (vacancies.size > 2 && !isShowAllVacancy.value) vacancies.take(3) else vacancies
 
-    Box(modifier = modifier){
+    Box(modifier = modifier) {
 
         LazyColumn() {
-            item  {
+            item {
                 SearchBox()
             }
 
-            if  (!isShowAllVacancy.value){
+            if (!isShowAllVacancy.value) {
                 item {
-                    LazyRow (Modifier.padding(top = 16.dp, start = 16.dp)) {
+                    LazyRow(Modifier.padding(top = 16.dp, start = 16.dp)) {
 
-                        items(offers, key = { it.id } ){
+                        items(offers, key = { it.id }) {
                             OfferPreviewCard(it)
                         }
                     }
                 }
             }
 
-            if (isShowAllVacancy.value){
+            if (isShowAllVacancy.value) {
                 item {
-                    VacancyByRequirements(vacancies.size, Modifier.padding(start = 16.dp, top = 16.dp, end = 16.dp))
+                    VacancyByRequirements(
+                        vacancies.size,
+                        Modifier.padding(start = 16.dp, top = 16.dp, end = 16.dp)
+                    )
                 }
             }
 
@@ -117,19 +121,21 @@ fun VacancyListScreen(
                 )
             }
 
-            items(currentVacancies, key = { it.id}){
+            items(currentVacancies, key = { it.id }) {
                 VacancyPreviewCard(
                     it,
-                    onFavouriteClick = {vacancy ->
-                        viewModel.changeFavouriteStatus(vacancy.id)} ,
-                    onVacancyCLick = {vacancy ->
+                    onFavouriteClick = { vacancy ->
+                        viewModel.changeFavouriteStatus(vacancy.id)
+                    },
+                    onVacancyCLick = { vacancy ->
                         onVacancyClick(vacancy)
-                        },
-                    Modifier.padding(start = 16.dp, end = 16.dp, bottom = 8.dp))
+                    },
+                    Modifier.padding(start = 16.dp, end = 16.dp, bottom = 8.dp)
+                )
             }
 
             item {
-                if (!isShowAllVacancy.value){
+                if (!isShowAllVacancy.value) {
                     Button(
                         colors = ButtonDefaults.buttonColors(
                             contentColor = Color.White,
@@ -145,7 +151,7 @@ fun VacancyListScreen(
                             .fillMaxWidth(),
                         onClick = { isShowAllVacancy.value = !isShowAllVacancy.value },
                     ) {
-                        val size =vacancies.size
+                        val size = vacancies.size
                         Text(text = "Еще ${size - 3} вакансии")
                     }
                 }
