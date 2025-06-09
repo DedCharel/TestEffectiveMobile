@@ -13,6 +13,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import ru.nvgsoft.testeffectivemobile.domain.entity.VacancyEntity
 import ru.nvgsoft.testeffectivemobile.presentation.ViewModelFactory
 import ru.nvgsoft.testeffectivemobile.presentation.getApplicationComponent
 import ru.nvgsoft.testeffectivemobile.presentation.vacancy.VacancyPreviewCard
@@ -20,6 +21,7 @@ import ru.nvgsoft.testeffectivemobile.utils.declensionVacancy
 
 @Composable
 fun FavoriteScreen(
+    onVacancyCLick: (VacancyEntity) -> Unit,
     modifier: Modifier = Modifier
 ){
     val component = getApplicationComponent()
@@ -46,7 +48,7 @@ fun FavoriteScreen(
                 it,
                 onFavouriteClick = { vacancy ->
                     viewModel.changeFavouriteStatus(vacancy)} ,
-                onVacancyCLick = {},
+                onVacancyCLick = {onVacancyCLick(it)},
                 Modifier.padding(bottom = 8.dp)
 
             )

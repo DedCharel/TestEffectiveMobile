@@ -110,7 +110,12 @@ fun MainScreen() {
                     vacancy= vacancy.value ?: throw RuntimeException(" Vacancy is null")
                 )
             },
-            favouriteScreenContent = { FavoriteScreen(Modifier.padding(padding)) },
+            favouriteScreenContent = { FavoriteScreen(
+                {
+                    vacancy.value = it
+                    navigationState.navigateToDetail(it)
+                },
+                Modifier.padding(padding)) },
             responseScreenContent = { ResponseScreen() },
             messageScreenContent = { MessageScreen(Modifier.padding(padding)) },
             profileScreenContent = { ProfileScreen() })

@@ -27,11 +27,11 @@ private val LightColorScheme = lightColorScheme(
     background = Black,
     onSurface = Green,
     surfaceVariant = Grey1,
-
-
     onTertiary = DarkGreen,
 
 
+//TODO разобраться в правильности использования цветовых схем (какая схема для чего)
+//https://m3.material.io/styles/color/system/how-the-system-works
 )
 
 @Composable

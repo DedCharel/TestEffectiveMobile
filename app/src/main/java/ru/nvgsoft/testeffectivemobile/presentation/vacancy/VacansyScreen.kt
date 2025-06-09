@@ -45,6 +45,17 @@ fun VacancyScreen(
     val currentOfferState: OfferScreenState = offerScreenState.value
 
 
+
+
+
+    if (currentVacancyState is VacancyScreenState.Loading || currentOfferState is OfferScreenState.Loading) {
+        Box(
+            modifier = Modifier.fillMaxSize(),
+            contentAlignment = Alignment.Center
+        ) {
+            CircularProgressIndicator(color = Color.White)
+        }
+    }
     if (currentVacancyState is VacancyScreenState.VacancyList && currentOfferState is OfferScreenState.OfferList) {
         VacancyListScreen(
             viewModel = viewModel,
@@ -53,14 +64,8 @@ fun VacancyScreen(
             onVacancyClick = onVacancyClick,
             modifier
         )
-    }else {
-        Box(
-            modifier = Modifier.fillMaxSize(),
-            contentAlignment = Alignment.Center
-        ) {
-            CircularProgressIndicator(color = Color.White)
-        }
     }
+
 }
 
 

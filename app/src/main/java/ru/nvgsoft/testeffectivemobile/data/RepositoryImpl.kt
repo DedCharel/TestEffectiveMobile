@@ -24,10 +24,6 @@ class RepositoryImpl @Inject constructor(
     private val dao: AppDao
 ) : Repository {
 
-//    private val mapper = Mapper()
-//    private val apiService = ApiFactory.apiService
-//    private val dao = AppDatabase.getInstance(application).appDao()
-
     private val coroutineScope = CoroutineScope(Dispatchers.Default)
     private val refreshedListFlow = MutableSharedFlow<List<VacancyEntity>>()
     private val loadVacancies = flow {
