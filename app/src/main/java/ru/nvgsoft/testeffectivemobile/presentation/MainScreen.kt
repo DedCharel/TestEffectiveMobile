@@ -111,10 +111,9 @@ fun MainScreen() {
                 )
             },
             favouriteScreenContent = { FavoriteScreen(
-                {
-                    vacancy.value = it
-                    navigationState.navigateToDetail(it)
-                },
+                { //TODO реализовать навигацию на экран деталировки
+                    // реализовать правильную навигацию для корректного отображения
+                     },
                 Modifier.padding(padding)) },
             responseScreenContent = { ResponseScreen() },
             messageScreenContent = { MessageScreen(Modifier.padding(padding)) },
